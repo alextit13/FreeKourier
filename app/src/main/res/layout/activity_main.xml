@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activityes.MainActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/registration_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/registration_logo"
+                android:layout_width="200dp"
+                android:layout_height="50dp" />
+            <EditText
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:padding="5dp"
+                android:hint="@string/hint_example_email"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/background_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:padding="5dp"
+                android:hint="@string/hint_enter_password"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/background_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioGroup
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:text="@string/customer"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:text="@string/courier_ru"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+            <TableRow
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/color_gray_0"
+                    android:text="@string/cancel"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:layout_marginStart="5dp"
+                    android:background="@color/color_red_100"
+                    android:text="@string/ok"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

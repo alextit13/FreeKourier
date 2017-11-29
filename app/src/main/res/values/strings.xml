@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">FreeCourier</string>
+
+    <string name="hint_example_email">example@mail.com</string>
+    <string name="hint_enter_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="customer">Заказчик</string>
+    <string name="courier_ru">Курьер</string>
+    <string name="courier_en">Kourier</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="confirm">Принять</string>
+    <string name="sign_in">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="log_in">Войти</string>
+    <string name="email">E-mail</string>
+    <string name="title_activity_main_list_ads">MainListAds</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1087201713630",
+    "firebase_url": "https://freecourier-d6038.firebaseio.com",
+    "project_id": "freecourier-d6038",
+    "storage_bucket": "freecourier-d6038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087201713630:android:98323056fc6b03da",
+        "android_client_info": {
+          "package_name": "com.accherniakocich.android.freecourier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087201713630-bfju2tdpe5ppbeugp4cdlsdb4m8se5b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.accherniakocich.android.freecourier",
+            "certificate_hash": "1001de1a6b8579288ff162e1fb7fc93b898b52ab"
+          }
+        },
+        {
+          "client_id": "1087201713630-idr7gp2ep2reusin48ktoctfo9bnac3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqvLu-vtCAak5rACrHe2sFvbwjIhcLd3I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087201713630-idr7gp2ep2reusin48ktoctfo9bnac3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

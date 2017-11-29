@@ -24,6 +24,7 @@
                 android:textColor="@color/color_red_100"
                 android:textStyle="bold"/>
             <Button
+                android:id="@+id/start_activity_log_in"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_marginTop="50dp"
                 android:layout_gravity="center"
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"/>
             <Button
+                android:id="@+id/start_activity_registration"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_gravity="center"
                 android:background="@color/color_red_100"

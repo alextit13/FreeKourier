@@ -1,6 +1,7 @@
 package com.accherniakocich.android.freecourier.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,15 @@ import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CourierAdapter extends BaseAdapter{
     Context ctx;
@@ -52,11 +57,14 @@ public class CourierAdapter extends BaseAdapter{
             view = lInflater.inflate(R.layout.item_list_courier, parent, false);
         }
 
-        Courier courier = new Courier();
+        Courier courier = getAd(position);
         ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
         ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
         ((CheckBox) view.findViewById(R.id.item_list_courier_check_box)).setChecked(false);
-        //((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setRating(0.7f);
+
+        ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setRating(courier.getRatingCourier());
+        CircleImageView CIM = (CircleImageView) view.findViewById(R.id.item_list_courier_image);
+        Picasso.with(ctx).load(courier.getImagePathCourier()).into(CIM);
 
         //((TextView) view.findViewById(R.id.tvText)).setText(ad.getNameJobAd());
 
@@ -64,7 +72,7 @@ public class CourierAdapter extends BaseAdapter{
     }
 
     // товар по позиции
-    Ad getAd(int position) {
-        return ((Ad) getItem(position));
+    Courier getAd(int position) {
+        return ((Courier) getItem(position));
     }
 }

@@ -59,8 +59,10 @@ public class MainListAdsAndCourier extends AppCompatActivity
     }
 
     private void init() {
+
+        //лист с объявлениями
         /*listAd = new ArrayList<>();
-        mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAdsCourier_list_view);
+        mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
         for (int i = 0; i<100;i++){
             Ad ad = new Ad("Перевезти всякие вещи и что там еще что есть", "Москва, ул. Ленина,25 и вооще где только я живу оттуда и везти","Москва, ул. Чкалова, 9 куда завезете это ваше дело, не мне вас судить","Нужно перевезти коробку вообще там много всего всякого. Плачу копейки и больше ни чучуть даже",50);
             listAd.add(ad);
@@ -68,10 +70,13 @@ public class MainListAdsAndCourier extends AppCompatActivity
         adAdapter = new AdAdapter(MainListAdsAndCourier.this, listAd);
         mainListAdsCourier_list_view.setAdapter(adAdapter);*/
 
+
+
+        //лист с курьерами
         listCourier = new ArrayList<>();
         mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
-        for (int i = 0; i<100;i++){
-            Courier courier = new Courier("Иванов Иван Петрович", 6,"Завезем везде быстро и недорого","https://www.google.by/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiY_oeNk-bXAhUFbVAKHf6xDaMQjRwIBw&url=https%3A%2F%2Ftinyclipart.com%2Fpost%2Fman-15.html&psig=AOvVaw22udXjYLb6UQEmArk8rgha&ust=1512126161911619"
+        for (int i = 0; i<50;i++){
+            Courier courier = new Courier("Иванов Иван Петрович", 46,"Завезем везде быстро и недорого","https://tinyclipart.com/resource/man/man-15.jpg"
             ,false,new ArrayList<Ad>());
             listCourier.add(courier);
         }

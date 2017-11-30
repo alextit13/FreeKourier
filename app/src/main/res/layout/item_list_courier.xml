@@ -16,16 +16,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:layout_weight="1"
                 android:id="@+id/item_list_courier_check_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
+            <RatingBar
+                android:id="@+id/item_list_courier_rating_bar"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                style="@style/customRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </TableRow>
         <TextView
             android:id="@+id/item_list_courier_name"
             android:layout_marginStart="10dp"
             android:textColor="#000000"
-            tools:text="Игорь Иванов"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -35,7 +44,6 @@
             android:layout_marginStart="10dp"
             android:maxLines="1"
             android:lines="1"
-            tools:text="Доставим в любую точку страны быстро и выгодно"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>

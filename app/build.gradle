@@ -35,6 +35,9 @@ dependencies {
 
     //round images
     compile 'de.hdodenhof:circleimageview:2.2.0'
+
+    //picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 
 

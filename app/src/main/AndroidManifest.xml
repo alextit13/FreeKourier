@@ -20,12 +20,12 @@
         </activity>
         <activity
             android:name=".Activityes.StartActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activityes.Log_In"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Activityes.MainListAds"
+            android:name=".Activityes.MainListAdsAndCourier"
             android:label="@string/courier_en"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activityes.MainListCouriers"></activity>
     </application>
 
 </manifest>

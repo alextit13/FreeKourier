@@ -27,4 +27,5 @@
     <string name="hint_example_date_of_birdth">Дата рождения</string>
     <string name="hint_example_number_of_driver_root">Номер вод. прав</string>
     <string name="take_to_work">Взять в работу</string>
+    <string name="title_activity_main_list_courier">MainListCourier</string>
 </resources>

@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -129,7 +129,7 @@ public class Registration extends AppCompatActivity {
                 Intent intent;
                 String nickName = email.substring(0,email.indexOf("@",0));
                 //intent = new Intent(Registration.this,MainListCouriers.class); // регистрация как пользователь
-                intent = new Intent(Registration.this,MainListAds.class); // регистрация как курьер
+                intent = new Intent(Registration.this,MainListAdsAndCourier.class); // регистрация как курьер
                 User user = new User(
                         registration_courier_FIO.getText().toString()
                         ,Integer.parseInt(registration_courier_number_of_phone.getText().toString())

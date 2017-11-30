@@ -1,54 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:padding="10dp"
     android:background="@drawable/background_item_list_ads"
     android:layout_margin="10dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_weight="1"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RatingBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </TableRow>
         <TextView
-            android:layout_marginStart="10dp"
             android:textColor="#000000"
-            tools:text="Игорь Иванов"
+            tools:text="Перевезти"
+            android:textSize="19sp"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:id="@+id/item_list_ad_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@drawable/ic_info_outline_black_24dp"
+            android:id="@+id/image_view_item_main_list_ad_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+
+    <TextView
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#3d3d3d"
+        tools:text="Перевезти"
+        android:id="@+id/item_list_ad_about_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="#3d3d3d"
+            android:layout_weight="1"
+            tools:text="Перевезти"
+            android:id="@+id/item_list_ad_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@drawable/from_to"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="#3d3d3d"
+            android:layout_weight="1"
+            tools:text="Перевезти"
+            android:id="@+id/item_list_ad_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_weight="1"
+            android:textColor="#c7bb39"
+            tools:text="50 p."
+            android:textSize="20sp"
+            android:id="@+id/item_list_ad_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:textSize="12sp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            android:maxLines="1"
-            android:lines="1"
-            tools:text="Доставим в любую точку страны быстро и выгодно"
+            android:layout_marginTop="10dp"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:textColor="#3942c7"
+            android:text="@string/take_to_work"
+            android:textSize="20sp"
+            android:id="@+id/item_list_ad_take_to_work"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
-    </LinearLayout>
-    <FrameLayout
-        android:padding="5dp"
-        android:layout_weight="3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/cargo"/>
-    </FrameLayout>
+            android:layout_height="wrap_content" />
+    </TableRow>
 </LinearLayout>

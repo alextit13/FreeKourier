@@ -12,16 +12,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.R;
+import com.accherniakocich.android.freecourier.Сlasses.Ad;
+
+import java.util.ArrayList;
 
 public class MainListAds extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView mainListAds_list_view;
+    private AdAdapter adAdapter;
+    private ArrayList<Ad>list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list_ads);
+        init();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,6 +52,17 @@ public class MainListAds extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void init() {
+        list = new ArrayList<>();
+        mainListAds_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
+        for (int i = 0; i<100;i++){
+            Ad ad = new Ad("Перевезти всякие вещи и что там еще что есть", "Москва, ул. Ленина,25 и вооще где только я живу оттуда и везти","Москва, ул. Чкалова, 9 куда завезете это ваше дело, не мне вас судить","Нужно перевезти коробку вообще там много всего всякого. Плачу копейки и больше ни чучуть даже",50);
+            list.add(ad);
+        }
+        adAdapter = new AdAdapter(MainListAds.this,list);
+        mainListAds_list_view.setAdapter(adAdapter);
     }
 
     @Override

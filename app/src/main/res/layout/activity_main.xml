@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    android:id="@+id/registration_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activityes.Registration">
+    tools:context=".Activityes.Registration"
+    android:layout_marginBottom="20dp">
+    <ProgressBar
+        android:id="@+id/registration_progress_bar"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -66,11 +73,65 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content" />
             </RadioGroup>
+            <LinearLayout
+                android:id="@+id/container_courier_data"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/registration_courier_FIO"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:hint="@string/hint_FIO"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:background="@drawable/background_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/registration_courier_number_of_phone"
+                    android:inputType="phone"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:hint="@string/hint_example_number_of_phone"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:background="@drawable/background_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/registration_courier_date_of_birdth"
+                    android:inputType="date"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:hint="@string/hint_example_date_of_birdth"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:background="@drawable/background_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/registration_courier_number_of_driver_root"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:hint="@string/hint_example_number_of_driver_root"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:background="@drawable/background_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"/>
+            </LinearLayout>
             <TableRow
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:onClick="onClick"
                     android:id="@+id/registration_button_cancel"
                     android:layout_marginEnd="5dp"
                     android:background="@color/color_gray_0"
@@ -78,6 +139,7 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"/>
                 <Button
+                    android:onClick="onClick"
                     android:id="@+id/registration_button_ok"
                     android:layout_marginStart="5dp"
                     android:background="@color/color_red_100"

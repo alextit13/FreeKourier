@@ -22,4 +22,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="hint_FIO">ФИО</string>
+    <string name="hint_example_number_of_phone">Номер телефона</string>
+    <string name="hint_example_date_of_birdth">Дата рождения</string>
+    <string name="hint_example_number_of_driver_root">Номер вод. прав</string>
+    <string name="take_to_work">Взять в работу</string>
 </resources>

@@ -24,12 +24,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Registration extends AppCompatActivity {
 
     private FrameLayout registration_container;
 
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private EditText registration_ET_email,registration_ET_password;
     private RadioGroup registration_RG_check_group;
@@ -101,7 +103,12 @@ public class Registration extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        try {
+            Log.d(StartActivity.LOG_TAG,currentUser.getDisplayName());
+        }catch (Exception e){
+            Log.d(StartActivity.LOG_TAG,"нету пользователя");
+        }
     }
 
     public void onClick(View view) {
@@ -121,15 +128,17 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    private void registration(final String email, String password) {
+    private void registration(String email, String password) {
 
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isComplete()){
                     if (registration_RB_courier.isChecked()){ // регистрация курьера
-                        Log.d(StartActivity.LOG_TAG,"task = " + task.toString());
-                        Intent intent;
+
+                        Log.d(StartActivity.LOG_TAG,"task = " + task.getException());
+                        /*Intent intent;
                         String nickName = email.substring(0,email.indexOf("@",0));
                         //intent = new Intent(Registration.this,MainListCouriers.class); // регистрация как пользователь
                         intent = new Intent(Registration.this,MainListAdsAndCourier.class); // регистрация как курьер
@@ -144,7 +153,7 @@ public class Registration extends AppCompatActivity {
                                 ,0
                         );
                         intent.putExtra("user",user);
-                        startActivity(intent);
+                        startActivity(intent);*/
                     }
 
                 }else{

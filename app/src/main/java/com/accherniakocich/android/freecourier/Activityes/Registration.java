@@ -15,14 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.accherniakocich.android.freecourier.R;
+import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class Registration extends AppCompatActivity {
 
@@ -71,7 +72,8 @@ public class Registration extends AppCompatActivity {
         registration_RG_check_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i==2131230850){
+                //Log.d(StartActivity.LOG_TAG, "group = " + i+", id = " + registration_RB_courier.getId());
+                if (i==registration_RB_courier.getId()){
                     // курьер
                     layoutParams.height = 700;
                     container_courier_data.setLayoutParams(layoutParams);
@@ -99,7 +101,7 @@ public class Registration extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
     public void onClick(View view) {
@@ -116,7 +118,6 @@ public class Registration extends AppCompatActivity {
                 }else{
                     Snackbar.make(registration_button_ok,"Введите данные", BaseTransientBottomBar.LENGTH_LONG).show();
                 }
-
         }
     }
 
@@ -125,29 +126,39 @@ public class Registration extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d(StartActivity.LOG_TAG,"task = " + task.toString());
-                Intent intent;
-                String nickName = email.substring(0,email.indexOf("@",0));
-                //intent = new Intent(Registration.this,MainListCouriers.class); // регистрация как пользователь
-                intent = new Intent(Registration.this,MainListAdsAndCourier.class); // регистрация как курьер
-                User user = new User(
-                        registration_courier_FIO.getText().toString()
-                        ,Integer.parseInt(registration_courier_number_of_phone.getText().toString())
-                        ,registration_courier_date_of_birdth.getText().toString()
-                        ,registration_courier_number_of_driver_root.getText().toString()
-                        ,registration_ET_email.getText().toString()
-                        ,nickName
-                        ,0
-                );
-                intent.putExtra("user",user);
-                startActivity(intent);
+                if (task.isComplete()){
+                    if (registration_RB_courier.isChecked()){ // регистрация курьера
+                        Log.d(StartActivity.LOG_TAG,"task = " + task.toString());
+                        Intent intent;
+                        String nickName = email.substring(0,email.indexOf("@",0));
+                        //intent = new Intent(Registration.this,MainListCouriers.class); // регистрация как пользователь
+                        intent = new Intent(Registration.this,MainListAdsAndCourier.class); // регистрация как курьер
+
+                        User user = new User(
+                                registration_courier_FIO.getText().toString()
+                                ,Integer.parseInt(registration_courier_number_of_phone.getText().toString())
+                                ,registration_courier_date_of_birdth.getText().toString()
+                                ,registration_courier_number_of_driver_root.getText().toString()
+                                ,registration_ET_email.getText().toString()
+                                ,nickName
+                                ,0
+                        );
+                        intent.putExtra("user",user);
+                        startActivity(intent);
+                    }
+
+                }else{
+                    Toast.makeText(Registration.this, "Регистрация неудачна", Toast.LENGTH_SHORT).show();
+                    registration_progress_bar.setVisibility(View.INVISIBLE);
+                    registration_container.setAlpha(1f);
+                }
             }
         });
     }
 
     @Override
     protected void onDestroy() {
-        FirebaseAuth.getInstance().signOut();
+        //FirebaseAuth.getInstance().signOut();
         super.onDestroy();
     }
 }

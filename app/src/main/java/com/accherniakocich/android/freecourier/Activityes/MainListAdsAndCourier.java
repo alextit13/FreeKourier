@@ -3,6 +3,7 @@ package com.accherniakocich.android.freecourier.Activityes;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,24 +13,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.Adapters.CourierAdapter;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainListAdsAndCourier extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private ProgressBar content_main_list_ads_progress_bar;
     private ListView mainListAdsCourier_list_view;
     private AdAdapter adAdapter;
     private ArrayList<Ad> listAd;
     private ArrayList<Courier>listCourier;
     private CourierAdapter courierAdapter;
+
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+
+    private int SWICH_start_list_position = 1;
+    private int SWICH_end_list_position = 20;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,30 +79,89 @@ public class MainListAdsAndCourier extends AppCompatActivity
 
     private void init() {
 
-        //лист с объявлениями
-        listAd = new ArrayList<>();
+        content_main_list_ads_progress_bar = (ProgressBar)findViewById(R.id.content_main_list_ads_progress_bar);
+        content_main_list_ads_progress_bar.setVisibility(View.VISIBLE);
         mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
-        for (int i = 0; i<100;i++){
-            Ad ad = new Ad("Перевезти всякие вещи и что там еще что есть", "Москва, ул. Ленина,25","Москва, ул. Чкалова, 9","Нужно перевезти коробку вообще там много всего всякого. Плачу 500 рублей",500);
-            listAd.add(ad);
-        }
-        adAdapter = new AdAdapter(MainListAdsAndCourier.this, listAd);
-        mainListAdsCourier_list_view.setAdapter(adAdapter);
 
+        //лист с объявлениями
+        /*reference = FirebaseDatabase.getInstance().getReference().child("ads");
+        listAd = new ArrayList<>();
+        mGettingAdsList(reference);*/
 
 
         //лист с курьерами
-        /*listCourier = new ArrayList<>();
-        mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
-        for (int i = 0; i<50;i++){
-            Courier courier = new Courier("Иванов Иван Петрович", 46,"Завезем везде быстро и недорого","https://tinyclipart.com/resource/man/man-15.jpg",
-            "D8873",false,new ArrayList<Ad>(),"+552845651","04.5.1987","7654 7650 7643 8761");
-            listCourier.add(courier);
-        }
-        courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, listCourier);
-        mainListAdsCourier_list_view.setAdapter(courierAdapter);*/
+        reference = FirebaseDatabase.getInstance().getReference().child("couriers");
 
+        listCourier = new ArrayList<>();
+        mGettingCourierList(reference); // ТУТ НУЖНО ВКЛЮЧИТЬ ПОТОМ НЕ ЗАБЫТЬ!!!!!!!
     }
+
+    private void mGettingCourierList(DatabaseReference ref) {
+        final ArrayList<Courier>list = new ArrayList<>();
+        //Log.d(StartActivity.LOG_TAG,"start download");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                    //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
+                    list.add(data.getValue(Courier.class));
+                }
+                //Log.d(StartActivity.LOG_TAG,"data = " + list.size());
+                adapterCOURIERstart(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void adapterCOURIERstart(ArrayList<Courier> list) {
+        courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, list);
+        mainListAdsCourier_list_view.setAdapter(courierAdapter);
+        content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
+    }
+
+    private void mGettingAdsList(DatabaseReference ref) {
+        final ArrayList<Ad>list = new ArrayList<>();
+        //Log.d(StartActivity.LOG_TAG,"start download");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                    //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
+                    list.add(data.getValue(Ad.class));
+                }
+                adapterADstart(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void adapterADstart(ArrayList<Ad> list) {
+        adAdapter = new AdAdapter(MainListAdsAndCourier.this, list);
+        mainListAdsCourier_list_view.setAdapter(adAdapter);
+        content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
+    }
+
+    /*private void methFortest() {
+        listCourier = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference().child("couriers");
+
+        for (int i = 0; i<100;i++){
+            long time = new Date().getTime();
+            Courier courier = new Courier("Иванов Иван Петрович", 46,"Завезем везде быстро и недорого","https://tinyclipart.com/resource/man/man-15.jpg",
+                    "D8873",false,new ArrayList<Ad>(),"+552845651","04.5.1987","7654 7650 7643 8761");
+            reference.child(time+"").setValue(courier);
+        }
+        //adAdapter = new AdAdapter(MainListAdsAndCourier.this, listAd);
+        //mainListAdsCourier_list_view.setAdapter(adAdapter);
+    }*/
 
     @Override
     public void onBackPressed() {

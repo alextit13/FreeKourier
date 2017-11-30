@@ -8,16 +8,18 @@ public class Ad implements Serializable{
     private String to;
     private String aboutAd;
     private int price;
+    private String timeAd;
 
     public Ad() {
     }
 
-    public Ad(String adName, String from, String to, String aboutAd, int price) {
+    public Ad(String adName, String from, String to, String aboutAd, int price, String timeAd) {
         this.adName = adName;
         this.from = from;
         this.to = to;
         this.aboutAd = aboutAd;
         this.price = price;
+        this.timeAd = timeAd;
     }
 
     public String getAdName() {
@@ -58,5 +60,13 @@ public class Ad implements Serializable{
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getTimeAd() {
+        return timeAd;
+    }
+
+    public void setTimeAd(String timeAd) {
+        this.timeAd = timeAd;
     }
 }

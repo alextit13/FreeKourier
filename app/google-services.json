@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1087201713630-ropaq4aph13aeaola8362p8345qvfu31.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.accherniakocich.android.freecourier",
+            "certificate_hash": "9e783b5b481329f3bf521c2d2612271ae1fad93f"
+          }
+        },
+        {
           "client_id": "1087201713630-bfju2tdpe5ppbeugp4cdlsdb4m8se5b6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

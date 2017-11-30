@@ -35,8 +35,33 @@
             android:id="@+id/item_list_courier_name"
             android:layout_marginStart="10dp"
             android:textColor="#000000"
+            tools:text="Иванов Дмитрий Иванович"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/item_list_courier_date_of_birdth"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                tools:text="06.08.1987"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/item_list_courier_number_of_phone"
+                android:layout_marginStart="10dp"
+                android:textColor="#000000"
+                android:gravity="end"
+                tools:text="+258456556"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
         <TextView
             android:id="@+id/item_list_courier_about"
             android:textSize="12sp"
@@ -44,23 +69,44 @@
             android:layout_marginStart="10dp"
             android:maxLines="1"
             android:lines="1"
+            tools:text="Сделаем все быстро и качественно"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/item_list_courier_number_of_card"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:gravity="start"
+            tools:text="0000 0000 0000 0000"
+            android:textStyle="italic"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:padding="5dp"
         android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_gravity="center"
-            app:civ_border_width="1dp"
-            app:civ_border_color="@color/color_red_50"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/item_list_courier_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/cargo"/>
-    </FrameLayout>
+        <TextView
+            android:id="@+id/item_list_courier_number_of_driver_root"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:gravity="end"
+            tools:text="D5584"
+            android:textStyle="italic"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>

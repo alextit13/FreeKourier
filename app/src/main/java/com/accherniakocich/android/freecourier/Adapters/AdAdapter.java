@@ -55,7 +55,7 @@ public class AdAdapter extends BaseAdapter{
         ((TextView) view.findViewById(R.id.item_list_ad_about_ad)).setText(ad.getAboutAd());
         ((TextView) view.findViewById(R.id.item_list_ad_from)).setText(ad.getFrom());
         ((TextView) view.findViewById(R.id.item_list_ad_to)).setText(ad.getTo());
-        ((TextView) view.findViewById(R.id.item_list_ad_price)).setText(ad.getPrice()+"");
+        ((TextView) view.findViewById(R.id.item_list_ad_price)).setText(ad.getPrice()+" .р");
         //((TextView) view.findViewById(R.id.tvText)).setText(ad.getNameJobAd());
 
         return view;

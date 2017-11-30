@@ -61,27 +61,27 @@ public class MainListAdsAndCourier extends AppCompatActivity
     private void init() {
 
         //лист с объявлениями
-        /*listAd = new ArrayList<>();
+        listAd = new ArrayList<>();
         mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
         for (int i = 0; i<100;i++){
-            Ad ad = new Ad("Перевезти всякие вещи и что там еще что есть", "Москва, ул. Ленина,25 и вооще где только я живу оттуда и везти","Москва, ул. Чкалова, 9 куда завезете это ваше дело, не мне вас судить","Нужно перевезти коробку вообще там много всего всякого. Плачу копейки и больше ни чучуть даже",50);
+            Ad ad = new Ad("Перевезти всякие вещи и что там еще что есть", "Москва, ул. Ленина,25","Москва, ул. Чкалова, 9","Нужно перевезти коробку вообще там много всего всякого. Плачу 500 рублей",500);
             listAd.add(ad);
         }
         adAdapter = new AdAdapter(MainListAdsAndCourier.this, listAd);
-        mainListAdsCourier_list_view.setAdapter(adAdapter);*/
+        mainListAdsCourier_list_view.setAdapter(adAdapter);
 
 
 
         //лист с курьерами
-        listCourier = new ArrayList<>();
+        /*listCourier = new ArrayList<>();
         mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
         for (int i = 0; i<50;i++){
-            Courier courier = new Courier("Иванов Иван Петрович", 46,"Завезем везде быстро и недорого","https://tinyclipart.com/resource/man/man-15.jpg"
-            ,false,new ArrayList<Ad>());
+            Courier courier = new Courier("Иванов Иван Петрович", 46,"Завезем везде быстро и недорого","https://tinyclipart.com/resource/man/man-15.jpg",
+            "D8873",false,new ArrayList<Ad>(),"+552845651","04.5.1987","7654 7650 7643 8761");
             listCourier.add(courier);
         }
         courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, listCourier);
-        mainListAdsCourier_list_view.setAdapter(courierAdapter);
+        mainListAdsCourier_list_view.setAdapter(courierAdapter);*/
 
     }
 

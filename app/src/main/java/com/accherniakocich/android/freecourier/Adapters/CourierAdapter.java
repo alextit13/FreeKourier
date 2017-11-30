@@ -60,6 +60,11 @@ public class CourierAdapter extends BaseAdapter{
         Courier courier = getAd(position);
         ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
         ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
+        ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
+        ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
+        ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
+        ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
+
         ((CheckBox) view.findViewById(R.id.item_list_courier_check_box)).setChecked(false);
 
         ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setRating(courier.getRatingCourier());

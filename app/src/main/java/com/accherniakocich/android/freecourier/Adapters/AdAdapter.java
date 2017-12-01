@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.accherniakocich.android.freecourier.Activityes.MainListAdsAndCourier;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
+import com.accherniakocich.android.freecourier.Сlasses.Courier;
+import com.accherniakocich.android.freecourier.Сlasses.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,11 +25,13 @@ public class AdAdapter extends BaseAdapter{
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Ad> objects;
+    Courier courier;
 
-    public AdAdapter(Context context, ArrayList<Ad> products) {
+    public AdAdapter(Context context, ArrayList<Ad> products, Courier c) {
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        courier = c;
     }
 
     @Override
@@ -71,6 +75,8 @@ public class AdAdapter extends BaseAdapter{
                         .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //пользаватель взял в работу заказ
+                                ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
+                                listWithAdsCourier.add(objects.get(position));
                                 dialog.dismiss();
                             }
                         }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {

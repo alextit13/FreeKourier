@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activityes.Registration"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activityes.StartActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -33,7 +33,11 @@
         <activity
             android:name=".Activityes.MainListAdsAndCourier"
             android:label="@string/courier_en"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier" >
+
+        </activity>
+        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser">
 
         </activity>
     </application>

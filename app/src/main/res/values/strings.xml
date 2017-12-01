@@ -29,4 +29,6 @@
     <string name="take_to_work">Оставить заявку</string>
     <string name="title_activity_main_list_courier">MainListCourier</string>
     <string name="hint_example_number_of_card">Номер карточки</string>
+    <string name="exit">Выйти</string>
+    <string name="private_room">Личный кабинет</string>
 </resources>

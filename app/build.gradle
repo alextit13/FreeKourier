@@ -39,7 +39,12 @@ dependencies {
 
     //picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //gson
+    compile 'com.google.code.gson:gson:2.8.2'
 }
+
+
 
 
 

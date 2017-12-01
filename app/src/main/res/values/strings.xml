@@ -31,4 +31,5 @@
     <string name="hint_example_number_of_card">Номер карточки</string>
     <string name="exit">Выйти</string>
     <string name="private_room">Личный кабинет</string>
+    <string name="save_button_edit_data_private_room">Сохранить</string>
 </resources>

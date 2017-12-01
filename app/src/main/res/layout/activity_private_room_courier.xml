@@ -7,13 +7,82 @@
     android:layout_height="match_parent"
     tools:context=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier">
     <ScrollView
+        android:translationZ="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    app:civ_border_color="@color/color_red_50"
+                    app:civ_border_width="3dp"
+                    android:layout_gravity="center"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/item_list_courier_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cargo"/>
+                <ImageView
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/image_icon"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </TableRow>
+            <TextView
+                tools:text="Иванов Иван Иванович"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                tools:text="example@mail.com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                tools:text="+36558522"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                tools:text="AD454"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                tools:text="03.04.1989"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                tools:text="6587 6254 1225 3365"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                tools:text="Доставка быстро и качественно!"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                tools:text="Персональные заказы"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ListView
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

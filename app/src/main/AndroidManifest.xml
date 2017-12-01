@@ -34,10 +34,12 @@
             android:name=".Activityes.MainListAdsAndCourier"
             android:label="@string/courier_en"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier" >
+        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier"
+            android:theme="@style/MyActionBar">
 
         </activity>
-        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser">
+        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser"
+            android:theme="@style/MyActionBar">
 
         </activity>
     </application>

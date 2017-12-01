@@ -55,6 +55,29 @@
                 android:background="@drawable/background_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/registration_courier_FIO"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:padding="5dp"
+                android:hint="@string/hint_FIO"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/background_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/registration_courier_number_of_phone"
+                android:inputType="phone"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:padding="5dp"
+                android:hint="@string/hint_example_number_of_phone"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/background_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <RadioGroup
                 android:id="@+id/registration_RG_check_group"
                 android:layout_marginTop="20dp"
@@ -78,29 +101,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/registration_courier_FIO"
-                    android:layout_marginTop="20dp"
-                    android:textAlignment="center"
-                    android:padding="5dp"
-                    android:hint="@string/hint_FIO"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="80dp"
-                    android:background="@drawable/background_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <EditText
-                    android:id="@+id/registration_courier_number_of_phone"
-                    android:inputType="phone"
-                    android:layout_marginTop="20dp"
-                    android:textAlignment="center"
-                    android:padding="5dp"
-                    android:hint="@string/hint_example_number_of_phone"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="80dp"
-                    android:background="@drawable/background_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
                 <EditText
                     android:id="@+id/registration_courier_date_of_birdth"
                     android:inputType="date"
@@ -119,6 +120,18 @@
                     android:textAlignment="center"
                     android:padding="5dp"
                     android:hint="@string/hint_example_number_of_driver_root"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:background="@drawable/background_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"/>
+                <EditText
+                    android:id="@+id/registration_courier_number_of_card"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:hint="@string/hint_example_number_of_card"
                     android:layout_marginStart="80dp"
                     android:layout_marginEnd="80dp"
                     android:background="@drawable/background_edit_text"

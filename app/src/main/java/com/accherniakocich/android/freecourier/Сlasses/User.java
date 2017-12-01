@@ -3,36 +3,40 @@ package com.accherniakocich.android.freecourier.Сlasses;
 import java.io.Serializable;
 
 public class User implements Serializable{
-    private String courierFIO;
-    private int courierNumberPhone;
-    private String courierDateOfBirdth;
-    private String courierNumberOfDriverRoot;
-    private String courierNumberOfCard;
-    private String courierEmail;
-    private String courierNickName;
-    private int courierRating;
+    private String userFIO;
+    private String userNumberPhone;
+    private String userEmail;
 
     public User() {
     }
 
-    public User(String courierFIO, int courierNumberPhone, String courierDateOfBirdth, String courierNumberOfDriverRoot, String courierEmail, String courierNickName, int courierRating) {
-        this.courierFIO = courierFIO;
-        this.courierNumberPhone = courierNumberPhone;
-        this.courierDateOfBirdth = courierDateOfBirdth;
-        this.courierNumberOfDriverRoot = courierNumberOfDriverRoot;
-        this.courierEmail = courierEmail;
-        this.courierNickName = courierNickName;
-        this.courierRating = courierRating;
+    public User(String userFIO, String userNumberPhone, String userEmail) {
+        this.userFIO = userFIO;
+        this.userNumberPhone = userNumberPhone;
+        this.userEmail = userEmail;
     }
 
-    public User(String courierFIO, int courierNumberPhone, String courierDateOfBirdth, String courierNumberOfDriverRoot, String courierNumberOfCard, String courierEmail, String courierNickName, int courierRating) {
-        this.courierFIO = courierFIO;
-        this.courierNumberPhone = courierNumberPhone;
-        this.courierDateOfBirdth = courierDateOfBirdth;
-        this.courierNumberOfDriverRoot = courierNumberOfDriverRoot;
-        this.courierNumberOfCard = courierNumberOfCard;
-        this.courierEmail = courierEmail;
-        this.courierNickName = courierNickName;
-        this.courierRating = courierRating;
+    public String getUserFIO() {
+        return userFIO;
+    }
+
+    public void setUserFIO(String userFIO) {
+        this.userFIO = userFIO;
+    }
+
+    public String getUserNumberPhone() {
+        return userNumberPhone;
+    }
+
+    public void setUserNumberPhone(String userNumberPhone) {
+        this.userNumberPhone = userNumberPhone;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

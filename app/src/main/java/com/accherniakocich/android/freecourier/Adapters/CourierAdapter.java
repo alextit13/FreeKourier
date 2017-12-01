@@ -69,7 +69,11 @@ public class CourierAdapter extends BaseAdapter{
 
         ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setRating(courier.getRatingCourier());
         CircleImageView CIM = (CircleImageView) view.findViewById(R.id.item_list_courier_image);
-        Picasso.with(ctx).load(courier.getImagePathCourier()).into(CIM);
+        if (!courier.getImagePathCourier().equals("")){
+            Picasso.with(ctx).load(courier.getImagePathCourier()).into(CIM);
+        }else{
+            Picasso.with(ctx).load("http://www.sitechecker.eu/img/not-available.png").into(CIM);
+        }
 
         //((TextView) view.findViewById(R.id.tvText)).setText(ad.getNameJobAd());
 

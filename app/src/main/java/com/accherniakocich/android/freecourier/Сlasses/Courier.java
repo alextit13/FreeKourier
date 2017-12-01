@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Courier implements Serializable{
+
+    private String emailCourier;
     private String nameCourier;
     private int ratingCourier;
     private String aboutCourier;
@@ -20,10 +22,10 @@ public class Courier implements Serializable{
     public Courier() {
     }
 
-    public Courier(String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Ad> listAdCourier, String numberOfPhone, String dateOfBirdth) {
+    public Courier(String emailCourier, String nameCourier, int ratingCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Ad> listAdCourier, String numberOfPhone, String dateOfBirdth) {
+        this.emailCourier = emailCourier;
         this.nameCourier = nameCourier;
         this.ratingCourier = ratingCourier;
-        this.aboutCourier = aboutCourier;
         this.imagePathCourier = imagePathCourier;
         this.numberOfDriverRoot = numberOfDriverRoot;
         this.checkBoxCourier = checkBoxCourier;
@@ -32,7 +34,21 @@ public class Courier implements Serializable{
         this.dateOfBirdth = dateOfBirdth;
     }
 
-    public Courier(String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Ad> listAdCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
+    public Courier(String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Ad> listAdCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
+        this.emailCourier = emailCourier;
+        this.nameCourier = nameCourier;
+        this.ratingCourier = ratingCourier;
+        this.aboutCourier = aboutCourier;
+        this.numberOfDriverRoot = numberOfDriverRoot;
+        this.checkBoxCourier = checkBoxCourier;
+        this.listAdCourier = listAdCourier;
+        this.numberOfPhone = numberOfPhone;
+        this.dateOfBirdth = dateOfBirdth;
+        this.numberOfCard = numberOfCard;
+    }
+
+    public Courier(String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Ad> listAdCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
+        this.emailCourier = emailCourier;
         this.nameCourier = nameCourier;
         this.ratingCourier = ratingCourier;
         this.aboutCourier = aboutCourier;
@@ -43,6 +59,14 @@ public class Courier implements Serializable{
         this.numberOfPhone = numberOfPhone;
         this.dateOfBirdth = dateOfBirdth;
         this.numberOfCard = numberOfCard;
+    }
+
+    public String getEmailCourier() {
+        return emailCourier;
+    }
+
+    public void setEmailCourier(String emailCourier) {
+        this.emailCourier = emailCourier;
     }
 
     public String getNameCourier() {

@@ -1,9 +1,13 @@
 package com.accherniakocich.android.freecourier.Activityes;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +26,7 @@ import com.accherniakocich.android.freecourier.Adapters.CourierAdapter;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
+import com.accherniakocich.android.freecourier.Сlasses.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,17 +53,20 @@ public class MainListAdsAndCourier extends AppCompatActivity
 
     private int SWICH_start_list_position = 1;
     private int SWICH_end_list_position = 20;
+    private Courier courier;
+    private User user;
+    private FloatingActionButton fab;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list_ads);
-        init();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +74,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+        init();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -83,17 +91,26 @@ public class MainListAdsAndCourier extends AppCompatActivity
         content_main_list_ads_progress_bar.setVisibility(View.VISIBLE);
         mainListAdsCourier_list_view = (ListView)findViewById(R.id.mainListAds_list_view);
 
-        //лист с объявлениями
-        /*reference = FirebaseDatabase.getInstance().getReference().child("ads");
-        listAd = new ArrayList<>();
-        mGettingAdsList(reference);*/
+        Intent intent = getIntent();
+        courier = (Courier) intent.getSerializableExtra("courier");
+        user = (User)intent.getSerializableExtra("user");
+        if (courier!=null){
+            // вошел курьер. Показываем лист с объявлениями
+            deleteFloatingActionButton();
+            reference = FirebaseDatabase.getInstance().getReference().child("ads");
+            listAd = new ArrayList<>();
+            mGettingAdsList(reference);
+        }else if (user!=null){
+            // вошел пользователь, показываем курьеров
+            reference = FirebaseDatabase.getInstance().getReference().child("couriers");
 
+            listCourier = new ArrayList<>();
+            mGettingCourierList(reference);
+        }
+    }
 
-        //лист с курьерами
-        reference = FirebaseDatabase.getInstance().getReference().child("couriers");
-
-        listCourier = new ArrayList<>();
-        mGettingCourierList(reference); // ТУТ НУЖНО ВКЛЮЧИТЬ ПОТОМ НЕ ЗАБЫТЬ!!!!!!!
+    private void deleteFloatingActionButton() {
+        fab.setVisibility(View.INVISIBLE);
     }
 
     private void mGettingCourierList(DatabaseReference ref) {
@@ -149,19 +166,12 @@ public class MainListAdsAndCourier extends AppCompatActivity
         content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
     }
 
-    /*private void methFortest() {
-        listCourier = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference().child("couriers");
-
-        for (int i = 0; i<100;i++){
-            long time = new Date().getTime();
-            Courier courier = new Courier("Иванов Иван Петрович", 46,"Завезем везде быстро и недорого","https://tinyclipart.com/resource/man/man-15.jpg",
-                    "D8873",false,new ArrayList<Ad>(),"+552845651","04.5.1987","7654 7650 7643 8761");
-            reference.child(time+"").setValue(courier);
-        }
-        //adAdapter = new AdAdapter(MainListAdsAndCourier.this, listAd);
-        //mainListAdsCourier_list_view.setAdapter(adAdapter);
-    }*/
+    @Override
+    protected void onDestroy() {
+        courier = null;
+        user = null;
+        super.onDestroy();
+    }
 
     @Override
     public void onBackPressed() {
@@ -171,6 +181,26 @@ public class MainListAdsAndCourier extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        new AlertDialog.Builder(MainListAdsAndCourier.this)
+                .setTitle("Выход")
+                .setMessage("Вы уверены что хотите выйти?")
+                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //выход
+                        dialog.dismiss();
+                        finish();
+                    }
+                }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // пользователь отказался от выхода
+                dialog.dismiss();
+            }
+        }).show();
+        return false;
     }
 
     @Override

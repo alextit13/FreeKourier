@@ -3,6 +3,7 @@ package com.accherniakocich.android.freecourier.Сlasses;
 import java.io.Serializable;
 
 public class Ad implements Serializable{
+    private String peopleNameAd;
     private String adName;
     private String from;
     private String to;
@@ -13,13 +14,22 @@ public class Ad implements Serializable{
     public Ad() {
     }
 
-    public Ad(String adName, String from, String to, String aboutAd, int price, String timeAd) {
+    public Ad(String peopleNameAd, String adName, String from, String to, String aboutAd, int price, String timeAd) {
+        this.peopleNameAd = peopleNameAd;
         this.adName = adName;
         this.from = from;
         this.to = to;
         this.aboutAd = aboutAd;
         this.price = price;
         this.timeAd = timeAd;
+    }
+
+    public String getPeopleNameAd() {
+        return peopleNameAd;
+    }
+
+    public void setPeopleNameAd(String peopleNameAd) {
+        this.peopleNameAd = peopleNameAd;
     }
 
     public String getAdName() {

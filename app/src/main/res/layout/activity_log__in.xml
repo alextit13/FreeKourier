@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    android:id="@+id/container_log_in_frame_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activityes.Log_In">
+    <ProgressBar
+        android:scaleY=".5"
+        android:scaleX=".5"
+        android:id="@+id/progress_bar_log_in"
+        android:layout_gravity="center|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,6 +32,7 @@
                 android:textColor="@color/color_red_100"
                 android:textStyle="bold"/>
             <EditText
+                android:id="@+id/log_in_edit_text_email"
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="20dp"
                 android:textAlignment="center"
@@ -35,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
+                android:id="@+id/log_in_edit_text_password"
                 android:inputType="textPassword"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
@@ -45,20 +55,41 @@
                 android:background="@drawable/background_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <RadioGroup
+                android:id="@+id/radio_group_log_in"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radio_button_log_in_courier"
+                    android:text="@string/courier_ru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/radio_button_log_in_customer"
+                    android:text="@string/customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
             <Button
+                android:onClick="onClick"
+                android:id="@+id/log_id_button_ok"
                 android:fontFamily="sans-serif-condensed"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:background="@color/color_red_100"
-
                 android:text="@string/sign_in"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"/>
             <Button
+                android:onClick="onClick"
+                android:id="@+id/log_id_button_cancel"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_gravity="center"
-                android:background="@color/color_gray_0"
+                android:background="@color/color_red_100"
                 android:text="@string/cancel"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"/>

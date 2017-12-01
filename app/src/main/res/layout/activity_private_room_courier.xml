@@ -19,6 +19,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:onClick="onClick"
+                    android:id="@+id/edit_courier_get_photo_from_camenra"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:src="@android:drawable/ic_menu_camera"
@@ -26,18 +28,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/edit_courier_photo"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    app:civ_border_color="@color/color_red_50"
-                    app:civ_border_width="3dp"
                     android:layout_gravity="center"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/item_list_courier_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:src="@drawable/cargo"/>
                 <ImageView
+                    android:onClick="onClick"
+                    android:id="@+id/edit_courier_get_photo_from_memory"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/image_icon"
@@ -46,39 +48,74 @@
                     android:layout_height="match_parent"/>
             </TableRow>
             <TextView
-                tools:text="Иванов Иван Иванович"
+                android:id="@+id/edit_courier_name"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="25sp"
+                android:textColor="#161616"
+                android:gravity="center"
+                android:text="Иванов Иван Иванович"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                tools:text="example@mail.com"
+                android:id="@+id/edit_courier_email"
+                android:textColor="#000"
+                android:layout_marginEnd="20dp"
+                android:gravity="end"
+                android:text="example@mail.com"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                tools:text="+36558522"
+                android:id="@+id/edit_courier_number_phone"
+                android:textColor="#000"
+                android:layout_marginEnd="20dp"
+                android:gravity="end"
+                android:text="+36558522"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                tools:text="AD454"
+                android:id="@+id/edit_courier_number_draver_root"
+                android:textColor="#000"
+                android:layout_marginEnd="20dp"
+                android:gravity="end"
+                android:text="AD454"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                tools:text="03.04.1989"
+                android:id="@+id/edit_courier_date_of_birdth"
+                android:textColor="#000"
+                android:gravity="center"
+                android:text="03.04.1989"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                tools:text="6587 6254 1225 3365"
+                android:id="@+id/edit_courier_nnumber_card"
+                android:textColor="#000"
+                android:gravity="center"
+                android:text="6587 6254 1225 3365"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                tools:text="Доставка быстро и качественно!"
+                android:id="@+id/edit_courier_about_courier"
+                android:textColor="#000"
+                android:gravity="center"
+                android:text="Доставка быстро и качественно!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
+            <RatingBar
+                android:id="@+id/edit_courier_rating"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <TextView
-                tools:text="Персональные заказы"
+                android:layout_marginTop="20dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:text="Персональные заказы"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ListView
+                android:id="@+id/edit_courier_list_ads_personal"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

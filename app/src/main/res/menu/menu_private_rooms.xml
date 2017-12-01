@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier">
     <item
+        android:icon="@android:drawable/ic_menu_save"
+        android:id="@+id/save_data_private_room"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="always" />
+    <item
         android:icon="@android:drawable/ic_menu_edit"
         android:id="@+id/edit_data_private_room"
         android:orderInCategory="100"

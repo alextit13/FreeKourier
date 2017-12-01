@@ -154,11 +154,12 @@ public class Registration extends AppCompatActivity {
 
                         long date = new Date().getTime();
                         Courier courier = new Courier(
+                                date,
                                 email,
                                 registration_courier_FIO.getText().toString(),
                                 0,
                                 "",
-                                "",
+                                "http://www.sitechecker.eu/img/not-available.png",
                                 "",
                                 false,
                                 new ArrayList<Ad>(),

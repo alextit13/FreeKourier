@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.accherniakocich.android.freecourier.Activityes.AddAd">
+    <ScrollView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textSize="25sp"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/color_red_100"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/add_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/name_ad"
+                android:hint="@string/name_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/about_ad"
+                android:hint="@string/about_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/from_ad"
+                    android:hint="@string/from_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/from_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/to_ad"
+                    android:hint="@string/to_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <EditText
+                android:inputType="number"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/price_ad"
+                android:hint="@string/price_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:onClick="onClick"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_red_50"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/button_ad_add_cancel"
+                    android:hint="@string/cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:onClick="onClick"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_red_50"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/button_ad_add_ok"
+                    android:hint="@string/ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

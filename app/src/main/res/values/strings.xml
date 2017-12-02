@@ -34,4 +34,10 @@
     <string name="save_button_edit_data_private_room">Сохранить</string>
     <string name="name_courier">ФИО</string>
     <string name="about_courier">О себе (преимущества)</string>
+    <string name="add_ad">Добавление объявления</string>
+    <string name="name_ad">Название объявления</string>
+    <string name="about_ad">Описание</string>
+    <string name="from_ad">Откуда</string>
+    <string name="to_ad">Куда</string>
+    <string name="price_ad">Цена</string>
 </resources>

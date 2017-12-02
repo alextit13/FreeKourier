@@ -17,6 +17,7 @@ import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,8 +76,15 @@ public class AdAdapter extends BaseAdapter{
                         .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //пользаватель взял в работу заказ
-                                ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
-                                listWithAdsCourier.add(objects.get(position));
+                                //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
+                                //listWithAdsCourier.add(objects.get(position));
+                                long dateAddAdInList = new Date().getTime();
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("couriers")
+                                        .child(courier.getTimeCourierCreate()+"")
+                                        .child("listAdCourier")
+                                        .child(objects.get(position).getTimeAd())
+                                        .setValue(objects.get(position));
                                 dialog.dismiss();
                             }
                         }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {

@@ -25,11 +25,12 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity
             android:name=".Activityes.Registration"
+            android:noHistory="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activityes.StartActivity"
@@ -50,14 +51,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier"
-            android:theme="@style/MyActionBar"></activity>
+            android:theme="@style/MyActionBar" />
         <activity
             android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser"
+            android:theme="@style/MyActionBar" />
+        <activity
+            android:name=".Activityes.ActivitiesInNavMenu.EditDataAboutCourierAndUsersMode"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog"></activity>
+        <activity android:name=".Activityes.AddAd"
             android:theme="@style/MyActionBar"></activity>
-        <activity android:name=".Activityes.ActivitiesInNavMenu.EditDataAboutCourierAndUsersMode"
-            android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
-
-        </activity>
     </application>
 
 </manifest>

@@ -25,12 +25,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -94,8 +98,13 @@ public class PrivateRoomCourier extends AppCompatActivity {
         edit_courier_photo = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.edit_courier_photo);
 
         edit_courier_list_ads_personal = (ListView)findViewById(R.id.edit_courier_list_ads_personal);
+        downloadAndCompleteListWithAds();
 
         initDataFromCourier();
+    }
+
+    private void downloadAndCompleteListWithAds() {
+        // добавляем список объявлений с запросом на исполнение
     }
 
     private void initDataFromCourier() {
@@ -139,7 +148,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
             ,""
             ,edit_courier_number_draver_root.getText().toString()
             ,false
-            ,new ArrayList<Ad>()
+            ,courier.getListAdCourier()
             ,edit_courier_number_phone.getText().toString(),edit_courier_date_of_birdth.getText().toString()
             ,edit_courier_nnumber_card.getText().toString());
 
@@ -187,6 +196,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
                             .child("couriers")
                             .child(c.getTimeCourierCreate()+"")
                             .setValue(c);
+                    setDataInSharedPreferences(c);
                 }
             });
         }else{

@@ -162,7 +162,7 @@ public class Registration extends AppCompatActivity {
                                 "http://www.sitechecker.eu/img/not-available.png",
                                 "",
                                 false,
-                                new ArrayList<Ad>(),
+                                new ArrayList<Long>(),
                                 registration_courier_number_of_phone.getText().toString(),
                                 registration_courier_date_of_birdth.getText().toString(),
                                 registration_courier_number_of_card.getText().toString());

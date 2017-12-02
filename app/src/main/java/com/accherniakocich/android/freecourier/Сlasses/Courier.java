@@ -14,7 +14,7 @@ public class Courier implements Serializable{
     private String imagePathCourier;
     private String numberOfDriverRoot;
     private boolean checkBoxCourier;
-    private ArrayList<Ad> listAdCourier;
+    private ArrayList<Long> listAdCourier;
     private String numberOfPhone;
     private String dateOfBirdth;
     private String numberOfCard;
@@ -23,7 +23,7 @@ public class Courier implements Serializable{
     public Courier() {
     }
 
-    public Courier(long timeCourierCreate, String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Ad> listAdCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
+    public Courier(long timeCourierCreate, String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Long> listAdCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
         this.timeCourierCreate = timeCourierCreate;
         this.emailCourier = emailCourier;
         this.nameCourier = nameCourier;
@@ -96,11 +96,11 @@ public class Courier implements Serializable{
         this.checkBoxCourier = checkBoxCourier;
     }
 
-    public ArrayList<Ad> getListAdCourier() {
+    public ArrayList<Long> getListAdCourier() {
         return listAdCourier;
     }
 
-    public void setListAdCourier(ArrayList<Ad> listAdCourier) {
+    public void setListAdCourier(ArrayList<Long> listAdCourier) {
         this.listAdCourier = listAdCourier;
     }
 

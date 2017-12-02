@@ -2,9 +2,12 @@ package com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
@@ -15,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -30,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -41,6 +46,7 @@ import java.util.Date;
 
 public class PrivateRoomCourier extends AppCompatActivity {
 
+    private FrameLayout private_room_courier_editor_mode;
     private TextView edit_courier_name,edit_courier_email,edit_courier_number_phone
             ,edit_courier_number_draver_root,edit_courier_date_of_birdth
             ,edit_courier_nnumber_card,edit_courier_about_courier;
@@ -55,6 +61,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
     private static final int SELECT_FILE = 2;
     private Courier courier;
     private StorageReference mStorageRef;
+    private boolean editModeIsSelect = false; // показывает включен ли режим редактирования
 
 
     @Override
@@ -68,6 +75,8 @@ public class PrivateRoomCourier extends AppCompatActivity {
         Intent intent = getIntent();
         courier = (Courier) intent.getSerializableExtra("courier");
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        private_room_courier_editor_mode = (FrameLayout) findViewById(R.id.private_room_courier_editor_mode);
 
         edit_courier_name = (TextView)findViewById(R.id.edit_courier_name);
         edit_courier_email = (TextView)findViewById(R.id.edit_courier_email);
@@ -111,21 +120,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        new AlertDialog.Builder(PrivateRoomCourier.this)
-                .setTitle("Выход")
-                .setMessage("Выйти не сохраняя данные?")
-                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //выход
-                        dialog.dismiss();
-                        finish();
-                    }
-                }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // пользователь отказался от выхода
-                dialog.dismiss();
-            }
-        }).show();
         return super.onKeyDown(keyCode, event);
     }
 
@@ -134,6 +128,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.edit_data_private_room) {
             // тут режим редактирования
+            editorMode();
             return true;
         }else if (id == R.id.save_data_private_room){
             // тут сохраняем все шо написали
@@ -154,6 +149,12 @@ public class PrivateRoomCourier extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void editorMode() {
+        Intent intent = new Intent(PrivateRoomCourier.this,EditDataAboutCourierAndUsersMode.class);
+        intent.putExtra("courier",courier);
+        startActivityForResult(intent,3); // реквест код для изменения данных 3
     }
 
     private void saveDataAndImageOnDatabase(final Courier c){
@@ -270,13 +271,47 @@ public class PrivateRoomCourier extends AppCompatActivity {
                 }
             }
         }else if (requestCode==SELECT_FILE){
-            Uri selectedImage = data.getData();
+            Uri selectedImage = null;
             try {
-                photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                if (data!=null){
+                    selectedImage = data.getData();
+                    photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                }else{
+                    return;
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            edit_courier_photo.setImageURI(selectedImage);
+            if (selectedImage!=null){
+                edit_courier_photo.setImageURI(selectedImage);
+            }else{
+                return;
+            }
+        }else if (requestCode == 3){
+            if (data == null) {
+                return;
+            }else{
+
+                Courier c = (Courier) data.getSerializableExtra("c");
+                courier = c;
+                setDataInSharedPreferences(courier);
+                FirebaseDatabase.getInstance().getReference()
+                        .child("couriers")
+                        .child(courier.getTimeCourierCreate()+"")
+                        .setValue(courier);
+                Toast.makeText(this, "Данные изменятся через несколько минут", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void setDataInSharedPreferences(Courier courierNewFromEditMode) {
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(courierNewFromEditMode);
+        prefsEditor.putString("courier", json);
+        prefsEditor.commit();
     }
 }

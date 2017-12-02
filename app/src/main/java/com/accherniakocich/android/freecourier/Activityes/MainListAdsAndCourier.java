@@ -237,6 +237,14 @@ public class MainListAdsAndCourier extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.action_refresh){
+            content_main_list_ads_progress_bar.setVisibility(View.VISIBLE);
+            if (courier!=null){
+                mGettingAdsList(FirebaseDatabase.getInstance().getReference().child("ads"));
+            }else if (user!=null){
+                mGettingCourierList(FirebaseDatabase.getInstance().getReference().child("couriers"));
+            }
+            content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
         }
 
         return super.onOptionsItemSelected(item);
@@ -254,7 +262,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
                 Intent intent = new Intent(MainListAdsAndCourier.this,PrivateRoomCourier.class);
                 intent.putExtra("courier",courier);
                 startActivity(intent);
-            }else if (user!=null){
+            }else if (user!=null){ // если вошел пользователь
                 Intent intent = new Intent(MainListAdsAndCourier.this, PrivateRoomUser.class);
                 intent.putExtra("user",user);
                 startActivity(intent);

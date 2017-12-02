@@ -178,7 +178,7 @@ public class Registration extends AppCompatActivity {
                         long date = new Date().getTime();
                         User user = new User(registration_courier_FIO.getText().toString(),
                                 registration_courier_number_of_phone.getText().toString(),
-                                registration_ET_email.getText().toString());
+                                registration_ET_email.getText().toString(),new ArrayList<Ad>(),date);
                         FirebaseDatabase.getInstance().getReference()
                                 .child("users")
                                 .child(date+"")

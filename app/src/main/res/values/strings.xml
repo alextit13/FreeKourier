@@ -32,4 +32,6 @@
     <string name="exit">Выйти</string>
     <string name="private_room">Личный кабинет</string>
     <string name="save_button_edit_data_private_room">Сохранить</string>
+    <string name="name_courier">ФИО</string>
+    <string name="about_courier">О себе (преимущества)</string>
 </resources>

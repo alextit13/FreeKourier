@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -23,9 +25,9 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths"></meta-data>
         </provider>
+
         <activity
             android:name=".Activityes.Registration"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -46,12 +48,14 @@
             android:name=".Activityes.MainListAdsAndCourier"
             android:label="@string/courier_en"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier"
-            android:theme="@style/MyActionBar">
-
-        </activity>
-        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser"
-            android:theme="@style/MyActionBar">
+        <activity
+            android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier"
+            android:theme="@style/MyActionBar"></activity>
+        <activity
+            android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser"
+            android:theme="@style/MyActionBar"></activity>
+        <activity android:name=".Activityes.ActivitiesInNavMenu.EditDataAboutCourierAndUsersMode"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
 
         </activity>
     </application>

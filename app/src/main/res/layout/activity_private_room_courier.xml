@@ -120,12 +120,7 @@
         </LinearLayout>
     </ScrollView>
     <ListView
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:id="@+id/edit_courier_list_ads_personal"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

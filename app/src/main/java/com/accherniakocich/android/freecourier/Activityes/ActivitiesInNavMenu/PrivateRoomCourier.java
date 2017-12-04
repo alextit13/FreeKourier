@@ -112,9 +112,9 @@ public class PrivateRoomCourier extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data: dataSnapshot.getChildren()) {
-                    Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
-                    list.add(Long.parseLong(data.getValue().toString()));// сюда загрузили все даты создания добавленных объявлений
+                    list.add(Long.parseLong(data.getValue().toString()));// сфда загрузили все даты создания добавленных объявлений
                 }
+                Log.d(StartActivity.LOG_TAG,"size = " + list.size());
                 final ArrayList<Ad>arrayList = new ArrayList<>();
                 FirebaseDatabase.getInstance().getReference().child("ads").addValueEventListener(new ValueEventListener() {
                     @Override
@@ -132,7 +132,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
                                         finalList.add(arrayList.get(i));
                                     }
                                 }
-
                             }
                             createPrimaryList(finalList);
                         }

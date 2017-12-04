@@ -79,7 +79,32 @@ public class AdAdapter extends BaseAdapter{
         ((TextView) view.findViewById(R.id.item_list_ad_to)).setText(ad.getTo());
         ((TextView) view.findViewById(R.id.item_list_ad_price)).setText(ad.getPrice()+" .р");
         if (courier==null){
-            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("");
+            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("Удалить");
+            (view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new AlertDialog.Builder(ctx)
+                            .setTitle("Удалить заявку")
+                            .setMessage("Вы уверены что хотите удалить заказ?")
+                            .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    //пользаватель взял в работу заказ
+                                    //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
+                                    //listWithAdsCourier.add(objects.get(position));
+                                    FirebaseDatabase.getInstance().getReference()
+                                            .child("ads")
+                                            .child(objects.get(position).getTimeAd() + "")
+                                            .removeValue();
+                                    dialog.dismiss();
+                                }
+                            }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // пользователь отказался от заказа
+                            dialog.dismiss();
+                        }
+                    }).show();
+                }
+            });
         }
         ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +168,8 @@ public class AdAdapter extends BaseAdapter{
                 ((TextView)view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FirebaseDatabase.getInstance().getReference().child("couriers").child(courier.getTimeCourierCreate()+"").child("listAdCourier")
+                        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp")
+                                .child(courier.getTimeCourierCreate()+"")
                                 .child(objects.get(position).getTimeAd()+"").removeValue();
                         Toast.makeText(ctx,"Заявка будет отменена",Toast.LENGTH_LONG).show();
                     }

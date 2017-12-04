@@ -14,7 +14,6 @@ public class Courier implements Serializable{
     private String imagePathCourier;
     private String numberOfDriverRoot;
     private boolean checkBoxCourier;
-    private ArrayList<Long> listAdCourier;
     private String numberOfPhone;
     private String dateOfBirdth;
     private String numberOfCard;
@@ -23,7 +22,7 @@ public class Courier implements Serializable{
     public Courier() {
     }
 
-    public Courier(long timeCourierCreate, String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, ArrayList<Long> listAdCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
+    public Courier(long timeCourierCreate, String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
         this.timeCourierCreate = timeCourierCreate;
         this.emailCourier = emailCourier;
         this.nameCourier = nameCourier;
@@ -32,13 +31,18 @@ public class Courier implements Serializable{
         this.imagePathCourier = imagePathCourier;
         this.numberOfDriverRoot = numberOfDriverRoot;
         this.checkBoxCourier = checkBoxCourier;
-        this.listAdCourier = listAdCourier;
         this.numberOfPhone = numberOfPhone;
         this.dateOfBirdth = dateOfBirdth;
         this.numberOfCard = numberOfCard;
     }
 
+    public long getTimeCourierCreate() {
+        return timeCourierCreate;
+    }
 
+    public void setTimeCourierCreate(long timeCourierCreate) {
+        this.timeCourierCreate = timeCourierCreate;
+    }
 
     public String getEmailCourier() {
         return emailCourier;
@@ -96,14 +100,6 @@ public class Courier implements Serializable{
         this.checkBoxCourier = checkBoxCourier;
     }
 
-    public ArrayList<Long> getListAdCourier() {
-        return listAdCourier;
-    }
-
-    public void setListAdCourier(ArrayList<Long> listAdCourier) {
-        this.listAdCourier = listAdCourier;
-    }
-
     public String getNumberOfPhone() {
         return numberOfPhone;
     }
@@ -126,13 +122,5 @@ public class Courier implements Serializable{
 
     public void setNumberOfCard(String numberOfCard) {
         this.numberOfCard = numberOfCard;
-    }
-
-    public long getTimeCourierCreate() {
-        return timeCourierCreate;
-    }
-
-    public void setTimeCourierCreate(long timeCourierCreate) {
-        this.timeCourierCreate = timeCourierCreate;
     }
 }

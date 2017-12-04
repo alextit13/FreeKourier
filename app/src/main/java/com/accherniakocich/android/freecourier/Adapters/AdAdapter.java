@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.accherniakocich.android.freecourier.Activityes.MainListAdsAndCourier;
+import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
@@ -27,8 +29,17 @@ public class AdAdapter extends BaseAdapter{
     LayoutInflater lInflater;
     ArrayList<Ad> objects;
     Courier courier;
+    String fromWhere;
 
     public AdAdapter(Context context, ArrayList<Ad> products, Courier c) {
+        ctx = context;
+        objects = products;
+        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        courier = c;
+    }
+
+    public AdAdapter(Context context, ArrayList<Ad> products, Courier c, String from) {
+        fromWhere = from;
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,32 +78,38 @@ public class AdAdapter extends BaseAdapter{
         ((TextView) view.findViewById(R.id.item_list_ad_from)).setText(ad.getFrom());
         ((TextView) view.findViewById(R.id.item_list_ad_to)).setText(ad.getTo());
         ((TextView) view.findViewById(R.id.item_list_ad_price)).setText(ad.getPrice()+" .р");
+        if (courier==null){
+            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("");
+        }
         ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(ctx)
-                        .setTitle("Взять в работу")
-                        .setMessage("Вы уверены что хотите взять в работу заказ?")
-                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                //пользаватель взял в работу заказ
-                                //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
-                                //listWithAdsCourier.add(objects.get(position));
-                                long dateAddAdInList = new Date().getTime();
-                                FirebaseDatabase.getInstance().getReference()
-                                        .child("couriers")
-                                        .child(courier.getTimeCourierCreate()+"")
-                                        .child("listAdCourier")
-                                        .child(objects.get(position).getTimeAd())
-                                        .setValue(objects.get(position));
-                                dialog.dismiss();
-                            }
-                        }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // пользователь отказался от заказа
-                        dialog.dismiss();
-                    }
-                }).show();
+                if (courier!=null){
+                    new AlertDialog.Builder(ctx)
+                            .setTitle("Взять в работу")
+                            .setMessage("Вы уверены что хотите взять в работу заказ?")
+                            .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    //пользаватель взял в работу заказ
+                                    //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
+                                    //listWithAdsCourier.add(objects.get(position));
+                                    long dateAddAdInList = new Date().getTime();
+                                    FirebaseDatabase.getInstance().getReference()
+                                            .child("couriersWitwApp")
+                                            .child(courier.getTimeCourierCreate()+"")
+                                            .child(objects.get(position).getTimeAd())
+                                            .setValue(objects.get(position).getTimeAd());
+                                    dialog.dismiss();
+                                }
+                            }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // пользователь отказался от заказа
+                            dialog.dismiss();
+                        }
+                    }).show();
+                }else{ // если мы вошли через кабинет пользователя user
+
+                }
             }
         });
         ((ImageView) view.findViewById(R.id.image_view_item_main_list_ad_info)).setOnClickListener(new View.OnClickListener() {
@@ -119,6 +136,21 @@ public class AdAdapter extends BaseAdapter{
                         }).show();
             }
         });
+
+        if (fromWhere!=null){
+            if (fromWhere.equals("privateRoomCourier")){
+                ((TextView)view.findViewById(R.id.item_list_ad_take_to_work)).setText("Отменить заявку");
+                ((TextView)view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseDatabase.getInstance().getReference().child("couriers").child(courier.getTimeCourierCreate()+"").child("listAdCourier")
+                                .child(objects.get(position).getTimeAd()+"").removeValue();
+                        Toast.makeText(ctx,"Заявка будет отменена",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }
+
 
         return view;
     }

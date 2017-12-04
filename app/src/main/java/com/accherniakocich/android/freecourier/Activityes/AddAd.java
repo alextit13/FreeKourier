@@ -67,7 +67,6 @@ public class AddAd extends AppCompatActivity {
                 break;
             case R.id.button_ad_add_ok:
                 createAd();
-
         }
     }
 
@@ -80,7 +79,7 @@ public class AddAd extends AppCompatActivity {
                 &&!price_ad.getText().equals("")){
             Ad ad = new Ad(user.getUserFIO(),name_ad.getText().toString(),from_ad.getText().toString()
                     ,to_ad.getText().toString(),about_ad.getText().toString(), Integer.parseInt(price_ad.getText().toString())
-                    ,date+"");
+                    ,date+"",user.getDate()+"");
             saveAndPushAd(ad);
         }else{
             Snackbar.make(button_ad_add_ok,"Заполните все поля", BaseTransientBottomBar.LENGTH_SHORT).show();

@@ -151,7 +151,8 @@ public class Registration extends AppCompatActivity {
                         //Log.d(StartActivity.LOG_TAG,"task = " + task.getException());
                         //intent = new Intent(Registration.this,MainListCouriers.class); // регистрация как пользователь
                         intent = new Intent(Registration.this,MainListAdsAndCourier.class); // регистрация как курьер
-
+                        ArrayList <String> list = new ArrayList<>();
+                        list.add("0");
                         long date = new Date().getTime();
                         Courier courier = new Courier(
                                 date,
@@ -162,7 +163,6 @@ public class Registration extends AppCompatActivity {
                                 "http://www.sitechecker.eu/img/not-available.png",
                                 "",
                                 false,
-                                new ArrayList<Long>(),
                                 registration_courier_number_of_phone.getText().toString(),
                                 registration_courier_date_of_birdth.getText().toString(),
                                 registration_courier_number_of_card.getText().toString());

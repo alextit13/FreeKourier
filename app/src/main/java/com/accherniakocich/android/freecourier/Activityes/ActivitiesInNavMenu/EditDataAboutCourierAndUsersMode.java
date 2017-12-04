@@ -115,7 +115,6 @@ public class EditDataAboutCourierAndUsersMode extends AppCompatActivity {
                     ,courier.getImagePathCourier()
                     ,edit_text_number_of_driver_root_courier.getText().toString()
                     ,false
-                    ,courier.getListAdCourier()
                     ,edit_text_number_of_phone_courier.getText().toString()
                     ,edit_text_date_of_birdth.getText().toString()
                     ,edit_text_number_of_card_courier.getText().toString());

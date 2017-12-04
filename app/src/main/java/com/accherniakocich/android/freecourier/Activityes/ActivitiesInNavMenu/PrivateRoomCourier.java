@@ -14,17 +14,20 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
@@ -50,12 +53,10 @@ import java.util.Date;
 
 public class PrivateRoomCourier extends AppCompatActivity {
 
-    private FrameLayout private_room_courier_editor_mode;
-    private TextView edit_courier_name,edit_courier_email,edit_courier_number_phone
-            ,edit_courier_number_draver_root,edit_courier_date_of_birdth
-            ,edit_courier_nnumber_card,edit_courier_about_courier;
+    private LinearLayout private_room_courier_editor_mode;
+    private TextView edit_courier_name, edit_courier_email, edit_courier_number_phone, edit_courier_number_draver_root, edit_courier_date_of_birdth, edit_courier_nnumber_card, edit_courier_about_courier;
     private RatingBar edit_courier_rating;
-    private ImageView edit_courier_get_photo_from_camenra,edit_courier_get_photo_from_memory;
+    private ImageView edit_courier_get_photo_from_camenra, edit_courier_get_photo_from_memory;
     private de.hdodenhof.circleimageview.CircleImageView edit_courier_photo;
     private ListView edit_courier_list_ads_personal;
     private String mCurrentPhotoPath;
@@ -80,31 +81,80 @@ public class PrivateRoomCourier extends AppCompatActivity {
         courier = (Courier) intent.getSerializableExtra("courier");
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        private_room_courier_editor_mode = (FrameLayout) findViewById(R.id.private_room_courier_editor_mode);
+        private_room_courier_editor_mode = (LinearLayout) findViewById(R.id.private_room_courier_editor_mode);
 
-        edit_courier_name = (TextView)findViewById(R.id.edit_courier_name);
-        edit_courier_email = (TextView)findViewById(R.id.edit_courier_email);
-        edit_courier_number_phone = (TextView)findViewById(R.id.edit_courier_number_phone);
-        edit_courier_number_draver_root = (TextView)findViewById(R.id.edit_courier_number_draver_root);
-        edit_courier_date_of_birdth = (TextView)findViewById(R.id.edit_courier_date_of_birdth);
-        edit_courier_nnumber_card = (TextView)findViewById(R.id.edit_courier_nnumber_card);
-        edit_courier_about_courier = (TextView)findViewById(R.id.edit_courier_about_courier);
+        edit_courier_name = (TextView) findViewById(R.id.edit_courier_name);
+        edit_courier_email = (TextView) findViewById(R.id.edit_courier_email);
+        edit_courier_number_phone = (TextView) findViewById(R.id.edit_courier_number_phone);
+        edit_courier_number_draver_root = (TextView) findViewById(R.id.edit_courier_number_draver_root);
+        edit_courier_date_of_birdth = (TextView) findViewById(R.id.edit_courier_date_of_birdth);
+        edit_courier_nnumber_card = (TextView) findViewById(R.id.edit_courier_nnumber_card);
+        edit_courier_about_courier = (TextView) findViewById(R.id.edit_courier_about_courier);
 
-        edit_courier_rating = (RatingBar)findViewById(R.id.edit_courier_rating);
+        edit_courier_rating = (RatingBar) findViewById(R.id.edit_courier_rating);
 
-        edit_courier_get_photo_from_camenra = (ImageView)findViewById(R.id.edit_courier_get_photo_from_camenra);
-        edit_courier_get_photo_from_memory = (ImageView)findViewById(R.id.edit_courier_get_photo_from_memory);
+        edit_courier_get_photo_from_camenra = (ImageView) findViewById(R.id.edit_courier_get_photo_from_camenra);
+        edit_courier_get_photo_from_memory = (ImageView) findViewById(R.id.edit_courier_get_photo_from_memory);
 
         edit_courier_photo = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.edit_courier_photo);
 
-        edit_courier_list_ads_personal = (ListView)findViewById(R.id.edit_courier_list_ads_personal);
+        edit_courier_list_ads_personal = (ListView) findViewById(R.id.edit_courier_list_ads_personal);
         downloadAndCompleteListWithAds();
 
         initDataFromCourier();
     }
 
     private void downloadAndCompleteListWithAds() {
+        final ArrayList <Long> list = new ArrayList<>();
         // добавляем список объявлений с запросом на исполнение
+        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").child(courier.getTimeCourierCreate()+"")
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                    Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
+                    list.add(Long.parseLong(data.getValue().toString()));// сюда загрузили все даты создания добавленных объявлений
+                }
+                final ArrayList<Ad>arrayList = new ArrayList<>();
+                FirebaseDatabase.getInstance().getReference().child("ads").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data: dataSnapshot.getChildren()) {
+                            //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
+                            arrayList.add(data.getValue(Ad.class)); // тут все объявления приложения
+                        }
+                        ArrayList<Ad>finalList = new ArrayList<>();
+                        Log.d(StartActivity.LOG_TAG,"arrayList size = " + arrayList.size());
+                        if (arrayList.size()!=0){
+                            for (int i = 0; i<arrayList.size();i++){
+                                for (int j = 0; j<list.size();j++){
+                                    if (arrayList.get(i).getTimeAd().equals(list.get(j)+"")){
+                                        finalList.add(arrayList.get(i));
+                                    }
+                                }
+
+                            }
+                            createPrimaryList(finalList);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void createPrimaryList(ArrayList<Ad> primaryList) {
+        AdAdapter adAdapter = new AdAdapter(this,primaryList,courier,"privateRoomCourier");
+        edit_courier_list_ads_personal.setAdapter(adAdapter);
     }
 
     private void initDataFromCourier() {
@@ -139,36 +189,35 @@ public class PrivateRoomCourier extends AppCompatActivity {
             // тут режим редактирования
             editorMode();
             return true;
-        }else if (id == R.id.save_data_private_room){
+        } else if (id == R.id.save_data_private_room) {
             // тут сохраняем все шо написали
-            Courier c = new Courier(courier.getTimeCourierCreate(),edit_courier_email.getText().toString()
-            ,edit_courier_name.getText().toString()
-            ,edit_courier_rating.getNumStars()
-            ,edit_courier_about_courier.getText().toString()
-            ,""
-            ,edit_courier_number_draver_root.getText().toString()
-            ,false
-            ,courier.getListAdCourier()
-            ,edit_courier_number_phone.getText().toString(),edit_courier_date_of_birdth.getText().toString()
-            ,edit_courier_nnumber_card.getText().toString());
+            Courier c = new Courier(courier.getTimeCourierCreate(), edit_courier_email.getText().toString()
+                    , edit_courier_name.getText().toString()
+                    , edit_courier_rating.getNumStars()
+                    , edit_courier_about_courier.getText().toString()
+                    , ""
+                    , edit_courier_number_draver_root.getText().toString()
+                    , false
+                    , edit_courier_number_phone.getText().toString(), edit_courier_date_of_birdth.getText().toString()
+                    , edit_courier_nnumber_card.getText().toString());
 
             saveDataAndImageOnDatabase(c);
 
-            Toast.makeText(this,"Данные сохранены",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Данные сохранены", Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void editorMode() {
-        Intent intent = new Intent(PrivateRoomCourier.this,EditDataAboutCourierAndUsersMode.class);
-        intent.putExtra("courier",courier);
-        startActivityForResult(intent,3); // реквест код для изменения данных 3
+        Intent intent = new Intent(PrivateRoomCourier.this, EditDataAboutCourierAndUsersMode.class);
+        intent.putExtra("courier", courier);
+        startActivityForResult(intent, 3); // реквест код для изменения данных 3
     }
 
-    private void saveDataAndImageOnDatabase(final Courier c){
-        if (photo!=null){
-            String namePhoto = courier.getTimeCourierCreate()+".jpg"; // уникальное имя фото
+    private void saveDataAndImageOnDatabase(final Courier c) {
+        if (photo != null) {
+            String namePhoto = courier.getTimeCourierCreate() + ".jpg"; // уникальное имя фото
             StorageReference mountainsRef = mStorageRef.child(namePhoto);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -187,26 +236,26 @@ public class PrivateRoomCourier extends AppCompatActivity {
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
                     //reference.child("ads").child(nameChild+"").setValue(ad);
-                    c.setImagePathCourier(downloadUrl+"");
+                    c.setImagePathCourier(downloadUrl + "");
                     FirebaseDatabase.getInstance().getReference()
-                            .child("couriers").child(c.getTimeCourierCreate()+"")
-                            .child("imagePathCourier").setValue(downloadUrl+"");
-                    FirebaseDatabase.getInstance()
+                            .child("couriers").child(c.getTimeCourierCreate() + "")
+                            .child("imagePathCourier").setValue(downloadUrl + "");
+                    /*FirebaseDatabase.getInstance()
                             .getReference()
                             .child("couriers")
-                            .child(c.getTimeCourierCreate()+"")
-                            .setValue(c);
+                            .child(c.getTimeCourierCreate() + "")
+                            .setValue(c);*/
                     setDataInSharedPreferences(c);
                 }
             });
-        }else{
+        } else {
 
         }
 
     }
 
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.edit_courier_get_photo_from_camenra:
                 takePhotoFromCamera();
                 break;
@@ -220,7 +269,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
         Intent intent = new Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent,SELECT_FILE);
+        startActivityForResult(intent, SELECT_FILE);
     }
 
     private void takePhotoFromCamera() {
@@ -280,35 +329,35 @@ public class PrivateRoomCourier extends AppCompatActivity {
                     // So need to Delete the path from DB
                 }
             }
-        }else if (requestCode==SELECT_FILE){
+        } else if (requestCode == SELECT_FILE) {
             Uri selectedImage = null;
             try {
-                if (data!=null){
+                if (data != null) {
                     selectedImage = data.getData();
                     photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                }else{
+                } else {
                     return;
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (selectedImage!=null){
+            if (selectedImage != null) {
                 edit_courier_photo.setImageURI(selectedImage);
-            }else{
+            } else {
                 return;
             }
-        }else if (requestCode == 3){
+        } else if (requestCode == 3) {
             if (data == null) {
                 return;
-            }else{
+            } else {
 
                 Courier c = (Courier) data.getSerializableExtra("c");
                 courier = c;
                 setDataInSharedPreferences(courier);
                 FirebaseDatabase.getInstance().getReference()
                         .child("couriers")
-                        .child(courier.getTimeCourierCreate()+"")
+                        .child(courier.getTimeCourierCreate() + "")
                         .setValue(courier);
                 Toast.makeText(this, "Данные изменятся через несколько минут", Toast.LENGTH_SHORT).show();
             }

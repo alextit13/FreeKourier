@@ -31,6 +31,7 @@ import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -139,7 +140,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data: dataSnapshot.getChildren()) {
-                    //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
+                    Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
                     list.add(data.getValue(Courier.class));
                 }
                 //Log.d(StartActivity.LOG_TAG,"data = " + list.size());

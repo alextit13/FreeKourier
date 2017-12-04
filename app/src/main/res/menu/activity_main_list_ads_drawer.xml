@@ -8,26 +8,11 @@
             android:id="@+id/private_room"
             android:icon="@drawable/private_room_icon"
             android:title="@string/private_room" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Управление">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
             <item
                 android:id="@+id/exit"
                 android:icon="@drawable/exit"

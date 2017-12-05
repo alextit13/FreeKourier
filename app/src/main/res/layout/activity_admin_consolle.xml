@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.accherniakocich.android.freecourier.Activityes.AdminConsolle">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:id="@+id/admin_ads"
+            android:onClick="onClick"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="@string/ads"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:background="@color/color_red_100"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/admin_couriers"
+            android:onClick="onClick"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="@string/couriers"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </TableRow>
+    <FrameLayout
+        android:id="@+id/admin_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+</LinearLayout>

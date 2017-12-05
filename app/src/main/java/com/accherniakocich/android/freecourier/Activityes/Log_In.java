@@ -78,6 +78,11 @@ public class Log_In extends AppCompatActivity {
                 progress_bar_log_in.setVisibility(View.VISIBLE);
                 log_id_button_ok.setClickable(false);
                 log_id_button_cancel.setClickable(false);
+                if (log_in_edit_text_email.getText().toString().equals("admin@admin.com")&&
+                        log_in_edit_text_password.getText().toString().equals("admin123")&&
+                        radio_button_log_in_courier.isChecked()){
+                    logIn(log_in_edit_text_email.getText().toString(),log_in_edit_text_password.getText().toString(),true);
+                }
                 if (!log_in_edit_text_email.getText().toString().equals("")&&!log_in_edit_text_password.getText().toString().equals("")
                         &&(radio_button_log_in_courier.isChecked()||radio_button_log_in_customer.isChecked())){
                     logIn(log_in_edit_text_email.getText().toString(),log_in_edit_text_password.getText().toString(),radio_button_log_in_courier.isChecked());
@@ -98,7 +103,6 @@ public class Log_In extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             // Sign in success, update UI with the signed-in user's information
                             final FirebaseUser user = mAuth.getCurrentUser();
                             if (checked){
@@ -151,6 +155,9 @@ public class Log_In extends AppCompatActivity {
 
                                             }
                                         });
+                            }if (log_in_edit_text_email.getText().toString().equals("admin@admin.com")){
+                                Intent intent = new Intent(Log_In.this,AdminConsolle.class);
+                                startActivity(intent);
                             }
                         } else {
                             // If sign in fails, display a message to the user.

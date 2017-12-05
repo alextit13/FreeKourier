@@ -59,8 +59,11 @@
             android:theme="@style/MyActionBar" />
         <activity
             android:name=".Activityes.ActivitiesInNavMenu.EditDataAboutCourierAndUsersMode"
-            android:theme="@style/Base.Theme.AppCompat.Light.Dialog"></activity>
-        <activity android:name=".Activityes.AddAd"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
+        <activity
+            android:name=".Activityes.AddAd"
+            android:theme="@style/MyActionBar" />
+        <activity android:name=".Activityes.AdminConsolle"
             android:theme="@style/MyActionBar"></activity>
     </application>
 

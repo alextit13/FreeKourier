@@ -40,4 +40,6 @@
     <string name="from_ad">Откуда</string>
     <string name="to_ad">Куда</string>
     <string name="price_ad">Цена</string>
+    <string name="ads">Объявления</string>
+    <string name="couriers">Курьеры</string>
 </resources>

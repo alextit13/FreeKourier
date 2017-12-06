@@ -1,10 +1,12 @@
 package com.accherniakocich.android.freecourier.Activityes;
-
+import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.accherniakocich.android.freecourier.Fragments.FragmentAds;
 import com.accherniakocich.android.freecourier.Fragments.FragmentCouriers;
 import com.accherniakocich.android.freecourier.R;
+import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Admin;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,13 +26,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-public class AdminConsolle extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class AdminConsolle extends AppCompatActivity implements FragmentAds.onSomeEventListener {
 
     private FragmentTransaction fTrans;
     private FragmentAds fragmentAds;
     private FragmentCouriers fragmentCouriers;
     private TextView textView_ads;
     private TextView textView_couriers;
+    private ArrayList<Ad>listWithAds;
+    private SharedPreferences appSharedPrefs;
+    private SharedPreferences.Editor prefsEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,7 @@ public class AdminConsolle extends AppCompatActivity {
     }
 
     private void init() {
+        listWithAds = new ArrayList<>();
         fragmentAds = new FragmentAds();
         fragmentCouriers = new FragmentCouriers();
         fTrans = getFragmentManager().beginTransaction();
@@ -56,8 +65,8 @@ public class AdminConsolle extends AppCompatActivity {
         Admin admin = (Admin) intent.getSerializableExtra("admin");
         if (admin == null) {
             Admin a = new Admin();
-            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+            appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+            prefsEditor = appSharedPrefs.edit();
             Gson gson = new Gson();
             String json = gson.toJson(a);
             prefsEditor.putString("admin", json);
@@ -93,8 +102,25 @@ public class AdminConsolle extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                //настройки
+            case R.id.action_sign_out:
+                //выход
+                new AlertDialog.Builder(AdminConsolle.this)
+                        .setTitle("Выход")
+                        .setMessage("Вы уверены что хотите выйти?")
+                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //выход
+                                SharedPreferences appSharedPrefs = PreferenceManager
+                                        .getDefaultSharedPreferences(getApplicationContext());
+                                appSharedPrefs.edit().clear().apply();
+                                finish();
+                            }
+                        }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // пользователь отказался от выхода
+                        dialog.dismiss();
+                    }
+                }).show();
                 break;
             case R.id.action_delete:
                 // удаляем выбранных курьеров
@@ -110,5 +136,12 @@ public class AdminConsolle extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void someEvent(ArrayList<Ad>list) {
+        //Fragment frag1 = getFragmentManager().findFragmentById(R.id.fragment_ads_admin);
+        listWithAds = list;
+
     }
 }

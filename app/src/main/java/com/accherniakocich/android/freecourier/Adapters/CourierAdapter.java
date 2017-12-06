@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
+import com.accherniakocich.android.freecourier.Сlasses.Admin;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,11 +28,13 @@ public class CourierAdapter extends BaseAdapter{
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Courier> objects;
+    Admin administrator;
 
-    public CourierAdapter(Context context, ArrayList<Courier> products) {
+    public CourierAdapter(Context context, ArrayList<Courier> products, Admin admin) {
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        administrator = admin;
     }
 
     @Override
@@ -50,7 +56,7 @@ public class CourierAdapter extends BaseAdapter{
 
     // пункт списка
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
         View view = convertView;
         if (view == null) {
@@ -58,14 +64,15 @@ public class CourierAdapter extends BaseAdapter{
         }
 
         Courier courier = getAd(position);
-        ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
+        if (courier.isCheckBoxCourier()){ // если курьера выбрали для исполнения работы
+            ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
+            ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
+            ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
+            ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
+        }
         ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
         ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
-        ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
-        ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
-        ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
 
-        ((CheckBox) view.findViewById(R.id.item_list_courier_check_box)).setChecked(false);
 
         ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setRating(courier.getRatingCourier());
         CircleImageView CIM = (CircleImageView) view.findViewById(R.id.item_list_courier_image);
@@ -73,6 +80,20 @@ public class CourierAdapter extends BaseAdapter{
             Picasso.with(ctx).load(courier.getImagePathCourier()).into(CIM);
         }else{
             Picasso.with(ctx).load("http://www.sitechecker.eu/img/not-available.png").into(CIM);
+        }
+
+        if (administrator!=null){
+            ((ImageView)view.findViewById(R.id.delete_courier)).setVisibility(View.VISIBLE);
+            ((ImageView)view.findViewById(R.id.delete_courier)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseDatabase.getInstance().getReference().child("couriers").child(objects.get(position).getTimeCourierCreate()+"")
+                            .removeValue();
+                    Toast.makeText(ctx, "Курьер будет удален из базы", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            ((ImageView)view.findViewById(R.id.delete_courier)).setVisibility(View.INVISIBLE);
         }
 
         //((TextView) view.findViewById(R.id.tvText)).setText(ad.getNameJobAd());

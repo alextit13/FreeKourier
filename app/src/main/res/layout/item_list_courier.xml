@@ -15,11 +15,11 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <CheckBox
-                android:layout_weight="1"
-                android:id="@+id/item_list_courier_check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/delete_courier"
+                android:src="@drawable/ic_delete_black_24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
             <RatingBar
                 android:id="@+id/item_list_courier_rating_bar"
                 android:layout_marginEnd="10dp"

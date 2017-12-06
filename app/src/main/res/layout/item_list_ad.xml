@@ -45,7 +45,7 @@
             android:textColor="#3d3d3d"
             android:layout_weight="1"
             tools:text="Перевезти"
-            android:id="@+id/item_list_ad_to"
+            android:id="@+id/item_list_ad_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
@@ -57,7 +57,7 @@
             android:textColor="#3d3d3d"
             android:layout_weight="1"
             tools:text="Перевезти"
-            android:id="@+id/item_list_ad_from"
+            android:id="@+id/item_list_ad_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </TableRow>

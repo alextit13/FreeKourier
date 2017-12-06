@@ -67,6 +67,25 @@ public class PrivateRoomUser extends AppCompatActivity {
         edit_user_list_ads_created = (ListView)findViewById(R.id.edit_user_list_ads_created);
         initDataFromUser();
         downloadDataFromServer(user);
+        takeNumberCouriersForOneAd();
+    }
+
+    private void takeNumberCouriersForOneAd() {
+        final ArrayList<String>listStringAdd = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                    //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
+                    listStringAdd.add(data.getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void downloadDataFromServer(User user) {

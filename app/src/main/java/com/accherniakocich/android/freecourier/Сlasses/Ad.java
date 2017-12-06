@@ -11,11 +11,12 @@ public class Ad implements Serializable{
     private int price;
     private String timeAd;
     private String usersTime;
+    private boolean isCheckAdmin;
 
     public Ad() {
     }
 
-    public Ad(String peopleNameAd, String adName, String from, String to, String aboutAd, int price, String timeAd, String usersTime) {
+    public Ad(String peopleNameAd, String adName, String from, String to, String aboutAd, int price, String timeAd, String usersTime, boolean isCheckAdmin) {
         this.peopleNameAd = peopleNameAd;
         this.adName = adName;
         this.from = from;
@@ -24,6 +25,7 @@ public class Ad implements Serializable{
         this.price = price;
         this.timeAd = timeAd;
         this.usersTime = usersTime;
+        this.isCheckAdmin = isCheckAdmin;
     }
 
     public String getPeopleNameAd() {
@@ -88,5 +90,13 @@ public class Ad implements Serializable{
 
     public void setUsersTime(String usersTime) {
         this.usersTime = usersTime;
+    }
+
+    public boolean isCheckAdmin() {
+        return isCheckAdmin;
+    }
+
+    public void setCheckAdmin(boolean checkAdmin) {
+        isCheckAdmin = checkAdmin;
     }
 }

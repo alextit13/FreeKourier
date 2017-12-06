@@ -155,7 +155,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
     }
 
     private void adapterCOURIERstart(ArrayList<Courier> list) {
-        courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, list);
+        courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, list,null);
         mainListAdsCourier_list_view.setAdapter(courierAdapter);
         content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
     }
@@ -181,6 +181,12 @@ public class MainListAdsAndCourier extends AppCompatActivity
     }
 
     private void adapterADstart(ArrayList<Ad> list) {
+        ArrayList<Ad>finalList = new ArrayList<>();
+        for (int i = 0; i<list.size();i++){
+            if (list.get(i).isCheckAdmin()){
+                finalList.add(list.get(i));
+            }
+        }
         adAdapter = new AdAdapter(MainListAdsAndCourier.this, list,courier);
         mainListAdsCourier_list_view.setAdapter(adAdapter);
         content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);

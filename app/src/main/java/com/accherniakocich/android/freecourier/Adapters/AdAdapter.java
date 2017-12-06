@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -72,13 +75,16 @@ public class AdAdapter extends BaseAdapter{
             view = lInflater.inflate(R.layout.item_list_ad, parent, false);
         }
 
+
         final Ad ad = getAd(position);
+
         ((TextView) view.findViewById(R.id.item_list_ad_name)).setText(ad.getAdName());
         ((TextView) view.findViewById(R.id.item_list_ad_about_ad)).setText(ad.getAboutAd());
         ((TextView) view.findViewById(R.id.item_list_ad_from)).setText(ad.getFrom());
         ((TextView) view.findViewById(R.id.item_list_ad_to)).setText(ad.getTo());
         ((TextView) view.findViewById(R.id.item_list_ad_price)).setText(ad.getPrice()+" .р");
         if (courier==null){
+
             ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("Удалить");
             (view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,6 +97,7 @@ public class AdAdapter extends BaseAdapter{
                                     //пользаватель взял в работу заказ
                                     //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
                                     //listWithAdsCourier.add(objects.get(position));
+                                    Log.d(StartActivity.LOG_TAG,"click");
                                     FirebaseDatabase.getInstance().getReference()
                                             .child("ads")
                                             .child(objects.get(position).getTimeAd() + "")
@@ -105,46 +112,53 @@ public class AdAdapter extends BaseAdapter{
                     }).show();
                 }
             });
-        }
-        ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (courier!=null){
-                    new AlertDialog.Builder(ctx)
-                            .setTitle("Взять в работу")
-                            .setMessage("Вы уверены что хотите взять в работу заказ?")
-                            .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    //пользаватель взял в работу заказ
-                                    //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
-                                    //listWithAdsCourier.add(objects.get(position));
-                                    long dateAddAdInList = new Date().getTime();
-                                    FirebaseDatabase.getInstance().getReference()
-                                            .child("couriersWitwApp")
-                                            .child(courier.getTimeCourierCreate()+"")
-                                            .child(objects.get(position).getTimeAd())
-                                            .setValue(objects.get(position).getTimeAd());
-                                    dialog.dismiss();
-                                }
-                            }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            // пользователь отказался от заказа
-                            dialog.dismiss();
-                        }
-                    }).show();
-                }else{ // если мы вошли через кабинет пользователя user
+        }else{
+            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (courier!=null){
+                        new AlertDialog.Builder(ctx)
+                                .setTitle("Взять в работу")
+                                .setMessage("Вы уверены что хотите взять в работу заказ?")
+                                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        //пользаватель взял в работу заказ
+                                        //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
+                                        //listWithAdsCourier.add(objects.get(position));
+                                        long dateAddAdInList = new Date().getTime();
+                                        FirebaseDatabase.getInstance().getReference()
+                                                .child("couriersWitwApp")
+                                                .child(courier.getTimeCourierCreate()+"")
+                                                .child(objects.get(position).getTimeAd())
+                                                .setValue(objects.get(position).getTimeAd());
+                                        dialog.dismiss();
+                                    }
+                                }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // пользователь отказался от заказа
+                                dialog.dismiss();
+                            }
+                        }).show();
+                    }else{ // если мы вошли через кабинет пользователя user
 
+                    }
                 }
-            }
-        });
+            });
+        }
+
         ((ImageView) view.findViewById(R.id.image_view_item_main_list_ad_info)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Date date=new Date(Long.parseLong(ad.getTimeAd()));
+                SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+                String dateText = df2.format(date);
+
                 new AlertDialog.Builder(ctx)
                         .setTitle("О доставке")
                         .setMessage("Заказчик: " + ad.getPeopleNameAd()
                         + "\n\n" +
-                        "Дата " + new Date().getTime()
+                        "Дата " + dateText
                                 + "\n\n" +
                         "О задании: " + ad.getAboutAd()
                                 + "\n\n" +
@@ -177,6 +191,17 @@ public class AdAdapter extends BaseAdapter{
             }
         }
 
+        if ((courier==null)&&(ad==null)){
+            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("Подтвердить");
+            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseDatabase.getInstance().getReference().child("ads").child(objects.get(position).getTimeAd() + "").child("checkAdmin")
+                            .setValue(true);
+                    Toast.makeText(ctx, "Объявление одобрено", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         return view;
     }

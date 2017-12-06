@@ -33,9 +33,11 @@
         <activity
             android:name=".Activityes.Registration"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activityes.StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,27 +46,35 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".Activityes.Log_In"
             android:noHistory="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Activityes.MainListAdsAndCourier"
             android:label="@string/courier_en"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomCourier"
             android:theme="@style/MyActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUser"
             android:theme="@style/MyActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Activityes.ActivitiesInNavMenu.EditDataAboutCourierAndUsersMode"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Activityes.AddAd"
             android:theme="@style/MyActionBar" />
         <activity android:name=".Activityes.AdminConsolle"
-            android:theme="@style/MyActionBar"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/MyActionBar">
+        </activity>
     </application>
 
 </manifest>

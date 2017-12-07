@@ -239,11 +239,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference()
                             .child("couriers").child(c.getTimeCourierCreate() + "")
                             .child("imagePathCourier").setValue(downloadUrl + "");
-                    /*FirebaseDatabase.getInstance()
-                            .getReference()
-                            .child("couriers")
-                            .child(c.getTimeCourierCreate() + "")
-                            .setValue(c);*/
                     setDataInSharedPreferences(c);
                 }
             });

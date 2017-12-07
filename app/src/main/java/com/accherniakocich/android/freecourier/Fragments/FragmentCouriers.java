@@ -46,7 +46,7 @@ public class FragmentCouriers extends Fragment{
                     list.add(data.getValue(Courier.class));
                 }
                 //Log.d(StartActivity.LOG_TAG,"listSize = " + list.size());
-                courierAdapter = new CourierAdapter(getActivity(),list,new Admin());
+                courierAdapter = new CourierAdapter(getActivity(),list,new Admin(),false,"");
                 fragment_ads_admin.setAdapter(courierAdapter);
                 progress_bar_courier_fragment.setVisibility(View.INVISIBLE);
             }

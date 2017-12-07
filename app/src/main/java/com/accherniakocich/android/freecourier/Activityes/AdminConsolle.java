@@ -1,31 +1,23 @@
 package com.accherniakocich.android.freecourier.Activityes;
-import android.app.Fragment;
+
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.accherniakocich.android.freecourier.Fragments.FragmentAds;
 import com.accherniakocich.android.freecourier.Fragments.FragmentCouriers;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Admin;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
 public class AdminConsolle extends AppCompatActivity implements FragmentAds.onSomeEventListener {

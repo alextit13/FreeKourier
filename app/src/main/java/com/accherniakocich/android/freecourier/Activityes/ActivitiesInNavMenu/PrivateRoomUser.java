@@ -72,7 +72,7 @@ public class PrivateRoomUser extends AppCompatActivity {
 
     private void takeNumberCouriersForOneAd() {
         final ArrayList<String>listStringAdd = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").child(user.getDate()+"").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data: dataSnapshot.getChildren()) {
@@ -135,6 +135,17 @@ public class PrivateRoomUser extends AppCompatActivity {
         }
         adAdapter = new AdAdapter(this,finalList,null);
         edit_user_list_ads_created.setAdapter(adAdapter);
+
+        edit_user_list_ads_created.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(PrivateRoomUser.this,PrivateRoomUserReview.class);
+                intent.putExtra("user",user);
+                intent.putExtra("position",position);
+                intent.putExtra("ad",finalList.get(position));
+                startActivity(intent);
+            }
+        });
 
         edit_user_list_ads_created.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

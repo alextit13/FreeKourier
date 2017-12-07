@@ -155,7 +155,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
     }
 
     private void adapterCOURIERstart(ArrayList<Courier> list) {
-        courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, list,null);
+        courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, list,null,false,"");
         mainListAdsCourier_list_view.setAdapter(courierAdapter);
         content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
     }

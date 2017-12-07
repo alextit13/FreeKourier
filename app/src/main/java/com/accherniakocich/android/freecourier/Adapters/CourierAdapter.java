@@ -29,12 +29,16 @@ public class CourierAdapter extends BaseAdapter{
     LayoutInflater lInflater;
     ArrayList<Courier> objects;
     Admin administrator;
+    boolean review;
+    String dateTimeAd;
 
-    public CourierAdapter(Context context, ArrayList<Courier> products, Admin admin) {
-        ctx = context;
-        objects = products;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        administrator = admin;
+    public CourierAdapter(Context ctx, ArrayList<Courier> objects, Admin administrator, boolean review,String dateAd) {
+        lInflater = LayoutInflater.from(ctx);
+        this.dateTimeAd=dateAd;
+        this.ctx = ctx;
+        this.objects = objects;
+        this.administrator = administrator;
+        this.review = review;
     }
 
     @Override
@@ -63,7 +67,7 @@ public class CourierAdapter extends BaseAdapter{
             view = lInflater.inflate(R.layout.item_list_courier, parent, false);
         }
 
-        Courier courier = getAd(position);
+        final Courier courier = getAd(position);
         if (courier.isCheckBoxCourier()){ // если курьера выбрали для исполнения работы
             ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
             ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
@@ -80,6 +84,19 @@ public class CourierAdapter extends BaseAdapter{
             Picasso.with(ctx).load(courier.getImagePathCourier()).into(CIM);
         }else{
             Picasso.with(ctx).load("http://www.sitechecker.eu/img/not-available.png").into(CIM);
+        }
+
+        if (review&&!dateTimeAd.equals("")){
+            ((TextView)view.findViewById(R.id.review)).setText("Сделать исполнителем");
+            ((TextView)view.findViewById(R.id.review)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // отправляем уведомление курьеру
+                    FirebaseDatabase.getInstance().getReference().child("ads").child(dateTimeAd)
+                            .child("courier").setValue(courier.getTimeCourierCreate()+"");
+                    Toast.makeText(ctx, "Исполнитель принят", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         if (administrator!=null){

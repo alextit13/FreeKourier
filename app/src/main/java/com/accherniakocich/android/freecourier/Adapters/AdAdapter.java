@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,11 @@ public class AdAdapter extends BaseAdapter{
 
         final Ad ad = getAd(position);
 
+        if (ad.getCourier().equals(courier.getTimeCourierCreate()+"")){
+            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("Вы приняты исполнителем");
+            ((LinearLayout)view.findViewById(R.id.container_Ad_adapter)).setBackgroundColor(0xFFaac2ad);
+        }
+
         ((TextView) view.findViewById(R.id.item_list_ad_name)).setText(ad.getAdName());
         ((TextView) view.findViewById(R.id.item_list_ad_about_ad)).setText(ad.getAboutAd());
         ((TextView) view.findViewById(R.id.item_list_ad_from)).setText(ad.getFrom());
@@ -128,9 +134,9 @@ public class AdAdapter extends BaseAdapter{
                                         long dateAddAdInList = new Date().getTime();
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child("couriersWitwApp")
-                                                .child(courier.getTimeCourierCreate()+"")
                                                 .child(objects.get(position).getTimeAd())
-                                                .setValue(objects.get(position).getTimeAd());
+                                                .child(courier.getTimeCourierCreate()+"")
+                                                .setValue(courier.getTimeCourierCreate()+"");
                                         dialog.dismiss();
                                     }
                                 }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
@@ -183,8 +189,8 @@ public class AdAdapter extends BaseAdapter{
                     @Override
                     public void onClick(View view) {
                         FirebaseDatabase.getInstance().getReference().child("couriersWitwApp")
-                                .child(courier.getTimeCourierCreate()+"")
-                                .child(objects.get(position).getTimeAd()+"").removeValue();
+                                .child(objects.get(position).getTimeAd()+"")
+                                .child(courier.getTimeCourierCreate()+"").removeValue();
                         Toast.makeText(ctx,"Заявка будет отменена",Toast.LENGTH_LONG).show();
                     }
                 });

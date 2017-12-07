@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/container_Ad_adapter"
     android:padding="10dp"
     android:background="@drawable/background_item_list_ads"
     android:layout_margin="10dp"
@@ -66,7 +67,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:layout_weight="1"
-            android:textColor="#c7bb39"
+            android:textColor="#fa0400"
             tools:text="50 p."
             android:textSize="20sp"
             android:id="@+id/item_list_ad_price"

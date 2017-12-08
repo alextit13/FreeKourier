@@ -79,9 +79,13 @@ public class AdAdapter extends BaseAdapter{
 
         final Ad ad = getAd(position);
 
-        if (ad.getCourier().equals(courier.getTimeCourierCreate()+"")){
-            ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("Вы приняты исполнителем");
-            ((LinearLayout)view.findViewById(R.id.container_Ad_adapter)).setBackgroundColor(0xFFaac2ad);
+        if (ad!=null){
+            if (courier!=null){
+                if (ad.getCourier().equals(courier.getTimeCourierCreate()+"")){
+                    ((TextView) view.findViewById(R.id.item_list_ad_take_to_work)).setText("Вы приняты исполнителем");
+                    ((LinearLayout)view.findViewById(R.id.container_Ad_adapter)).setBackgroundColor(0xFFaac2ad);
+                }
+            }
         }
 
         ((TextView) view.findViewById(R.id.item_list_ad_name)).setText(ad.getAdName());

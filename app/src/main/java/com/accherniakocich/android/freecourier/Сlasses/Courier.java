@@ -9,7 +9,7 @@ public class Courier implements Serializable{
     private long timeCourierCreate;
     private String emailCourier;
     private String nameCourier;
-    private int ratingCourier;
+    private float ratingCourier;
     private String aboutCourier;
     private String imagePathCourier;
     private String numberOfDriverRoot;
@@ -22,7 +22,7 @@ public class Courier implements Serializable{
     public Courier() {
     }
 
-    public Courier(long timeCourierCreate, String emailCourier, String nameCourier, int ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
+    public Courier(long timeCourierCreate, String emailCourier, String nameCourier, float ratingCourier, String aboutCourier, String imagePathCourier, String numberOfDriverRoot, boolean checkBoxCourier, String numberOfPhone, String dateOfBirdth, String numberOfCard) {
         this.timeCourierCreate = timeCourierCreate;
         this.emailCourier = emailCourier;
         this.nameCourier = nameCourier;
@@ -60,11 +60,11 @@ public class Courier implements Serializable{
         this.nameCourier = nameCourier;
     }
 
-    public int getRatingCourier() {
+    public float getRatingCourier() {
         return ratingCourier;
     }
 
-    public void setRatingCourier(int ratingCourier) {
+    public void setRatingCourier(float ratingCourier) {
         this.ratingCourier = ratingCourier;
     }
 

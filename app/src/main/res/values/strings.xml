@@ -42,4 +42,5 @@
     <string name="price_ad">Цена</string>
     <string name="ads">Объявления</string>
     <string name="couriers">Курьеры</string>
+    <string name="change_rating">Выставите рейтинг</string>
 </resources>

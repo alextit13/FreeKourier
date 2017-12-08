@@ -71,7 +71,7 @@ public class FragmentAds extends Fragment{
                     }
                 }
                 //Log.d(StartActivity.LOG_TAG,"listSize = " + list.size());
-                adAdapter = new AdAdapter(getActivity(),finalList,null);
+                adAdapter = new AdAdapter(getActivity(),finalList,null,"admin");
                 fragment_ads_admin.setAdapter(adAdapter);
                 progress_bar_ad_fragment.setVisibility(View.INVISIBLE);
                 someEventListener.someEvent(finalList); // это и интерфейс не нужные вещи

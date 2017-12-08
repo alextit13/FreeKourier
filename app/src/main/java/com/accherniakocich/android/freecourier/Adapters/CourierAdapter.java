@@ -68,6 +68,21 @@ public class CourierAdapter extends BaseAdapter{
         }
 
         final Courier courier = getAd(position);
+
+        if (review&&!dateTimeAd.equals("")){
+            ((TextView)view.findViewById(R.id.review)).setText("Сделать исполнителем");
+            ((TextView)view.findViewById(R.id.review)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // отправляем уведомление курьеру
+                    FirebaseDatabase.getInstance().getReference().child("ads").child(dateTimeAd)
+                            .child("courier").setValue(courier.getTimeCourierCreate()+"");
+                    Toast.makeText(ctx, "Исполнитель принят", Toast.LENGTH_SHORT).show();
+                    courier.setCheckBoxCourier(true);
+                }
+            });
+        }
+
         if (courier.isCheckBoxCourier()){ // если курьера выбрали для исполнения работы
             ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
             ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
@@ -86,18 +101,11 @@ public class CourierAdapter extends BaseAdapter{
             Picasso.with(ctx).load("http://www.sitechecker.eu/img/not-available.png").into(CIM);
         }
 
-        if (review&&!dateTimeAd.equals("")){
-            ((TextView)view.findViewById(R.id.review)).setText("Сделать исполнителем");
-            ((TextView)view.findViewById(R.id.review)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // отправляем уведомление курьеру
-                    FirebaseDatabase.getInstance().getReference().child("ads").child(dateTimeAd)
-                            .child("courier").setValue(courier.getTimeCourierCreate()+"");
-                    Toast.makeText(ctx, "Исполнитель принят", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+
+        /**
+         * НИЖЕ НУЖНО БУДЕТ ВКЛЮЧИТЬ. ДЛЯ ЭТОГО НУЖНО ДОБАВИТЬ КОРЗИНУ В ИТЕМ ДЛЯ КУРЬЕРА
+         */
+
 
         if (administrator!=null){
             ((ImageView)view.findViewById(R.id.delete_courier)).setVisibility(View.VISIBLE);

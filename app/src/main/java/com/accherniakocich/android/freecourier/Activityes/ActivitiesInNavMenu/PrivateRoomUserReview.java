@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.CourierAdapter;
+import com.accherniakocich.android.freecourier.Adapters.CourierAdapterCheckAdmin;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class PrivateRoomUserReview extends AppCompatActivity {
 
 
-    private CourierAdapter adapter;
+    private CourierAdapterCheckAdmin adapter;
     private ListView list_private_room_user_review;
     private int position;
     private ArrayList<Courier>list;
@@ -73,7 +74,7 @@ public class PrivateRoomUserReview extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     list.add(dataSnapshot.getValue(Courier.class));
-                    adapter = new CourierAdapter(PrivateRoomUserReview.this,list,null,true,ad.getTimeAd());
+                    adapter = new CourierAdapterCheckAdmin(PrivateRoomUserReview.this,list,null,true,ad.getTimeAd(),ad);
                     list_private_room_user_review.setAdapter(adapter);
                 }
 

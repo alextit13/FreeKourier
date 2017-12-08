@@ -187,7 +187,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
                 finalList.add(list.get(i));
             }
         }
-        adAdapter = new AdAdapter(MainListAdsAndCourier.this, list,courier);
+        adAdapter = new AdAdapter(MainListAdsAndCourier.this, finalList,courier);
         mainListAdsCourier_list_view.setAdapter(adAdapter);
         content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
     }

@@ -38,16 +38,18 @@ public class AdAdapter extends BaseAdapter{
     public AdAdapter(Context context, ArrayList<Ad> products, Courier c) {
         ctx = context;
         objects = products;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         courier = c;
+        lInflater = (LayoutInflater) ctx
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public AdAdapter(Context context, ArrayList<Ad> products, Courier c, String from) {
         fromWhere = from;
         ctx = context;
         objects = products;
-        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         courier = c;
+        lInflater = (LayoutInflater) ctx
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -87,6 +89,7 @@ public class AdAdapter extends BaseAdapter{
                 }
             }
         }
+
 
         ((TextView) view.findViewById(R.id.item_list_ad_name)).setText(ad.getAdName());
         ((TextView) view.findViewById(R.id.item_list_ad_about_ad)).setText(ad.getAboutAd());
@@ -212,6 +215,23 @@ public class AdAdapter extends BaseAdapter{
                 }
             });
         }
+
+        if (fromWhere!=null){ // одобрение объявлений админом
+            if (fromWhere.equals("admin")){
+                ((ImageView)view.findViewById(R.id.admin_check_ad)).setVisibility(View.VISIBLE);
+                ((ImageView)view.findViewById(R.id.admin_check_ad)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FirebaseDatabase.getInstance().getReference().child("ads").child(ad.getTimeAd()+"").child("checkAdmin")
+                                .setValue(true);
+                        Toast.makeText(ctx, "Объявление одобрено", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }else{
+            ((ImageView)view.findViewById(R.id.admin_check_ad)).setVisibility(View.INVISIBLE);
+        }
+
 
         return view;
     }

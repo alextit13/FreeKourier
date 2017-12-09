@@ -101,13 +101,13 @@ public class CourierAdapter extends BaseAdapter{
             Picasso.with(ctx).load("http://www.sitechecker.eu/img/not-available.png").into(CIM);
         }
 
-
-        /**
-         * НИЖЕ НУЖНО БУДЕТ ВКЛЮЧИТЬ. ДЛЯ ЭТОГО НУЖНО ДОБАВИТЬ КОРЗИНУ В ИТЕМ ДЛЯ КУРЬЕРА
-         */
-
-
         if (administrator!=null){
+            ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
+            ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
+            ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
+            ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
+            ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
+            ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
             ((ImageView)view.findViewById(R.id.delete_courier)).setVisibility(View.VISIBLE);
             ((ImageView)view.findViewById(R.id.delete_courier)).setOnClickListener(new View.OnClickListener() {
                 @Override

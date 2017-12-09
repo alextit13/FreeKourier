@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.CourierAdapter;
@@ -26,8 +27,8 @@ public class PrivateRoomUserReview extends AppCompatActivity {
     private CourierAdapterCheckAdmin adapter;
     private ListView list_private_room_user_review;
     private int position;
-    private ArrayList<Courier>list;
-    private ArrayList<Ad>listAd;
+    private ArrayList<Courier> list;
+    private ArrayList<Ad> listAd;
     private User user;
     private Ad ad;
 
@@ -41,11 +42,11 @@ public class PrivateRoomUserReview extends AppCompatActivity {
 
     private void init() {
         list = new ArrayList<>();
-        list_private_room_user_review = (ListView)findViewById(R.id.list_private_room_user_review);
+        list_private_room_user_review = (ListView) findViewById(R.id.list_private_room_user_review);
         Intent intent = getIntent();
-        position = intent.getIntExtra("position",0);
+        position = intent.getIntExtra("position", 0);
 
-        user = (User)intent.getSerializableExtra("user");
+        user = (User) intent.getSerializableExtra("user");
         ad = (Ad) intent.getSerializableExtra("ad");
 
         String numberAd = ad.getTimeAd();
@@ -54,7 +55,7 @@ public class PrivateRoomUserReview extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // делаем лист из всех номеров курьеров которые подали заявку
-                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     listNumberOfCouriers.add(data.getValue(String.class));
                 }
                 downloadListCouriers(listNumberOfCouriers);
@@ -68,21 +69,31 @@ public class PrivateRoomUserReview extends AppCompatActivity {
     }
 
     private void downloadListCouriers(ArrayList<String> listCouriers) {
-        for (int i = 0;i<listCouriers.size();i++){
+
+        for (int i = 0; i < listCouriers.size(); i++) {
             FirebaseDatabase.getInstance().getReference().child("couriers").child(listCouriers.get(i))
                     .addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    list.add(dataSnapshot.getValue(Courier.class));
-                    adapter = new CourierAdapterCheckAdmin(PrivateRoomUserReview.this,list,null,true,ad.getTimeAd(),ad);
-                    list_private_room_user_review.setAdapter(adapter);
-                }
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            list.add(dataSnapshot.getValue(Courier.class));
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                            for (int i = 0; i<list.size();i++){
+                                if (list.get(i)==null){
+                                    list.remove(i);
+                                }
+                            }
+                            if (list.size()>0){
+                                adapter = new CourierAdapterCheckAdmin(PrivateRoomUserReview.this, list, null, true, ad.getTimeAd(), ad);
+                                list_private_room_user_review.setAdapter(adapter);
+                                //Log.d(StartActivity.LOG_TAG,"item adapter = " + adapter.getItem(0));
+                            }
+                        }
 
-                }
-            });
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
         }
     }
 }

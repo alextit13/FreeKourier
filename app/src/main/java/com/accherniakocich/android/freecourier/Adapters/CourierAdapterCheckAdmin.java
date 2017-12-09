@@ -31,6 +31,9 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
     boolean review;
     String dateTimeAd;
     Ad ad;
+    CourierAdapterCheckAdmin adapter;
+
+    int swicher = 0;
 
     public CourierAdapterCheckAdmin(Context ctx, ArrayList<Courier> objects, Admin administrator, boolean review, String dateAd,Ad ad) {
         lInflater = LayoutInflater.from(ctx);
@@ -40,6 +43,7 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
         this.objects = objects;
         this.administrator = administrator;
         this.review = review;
+        this.adapter=this;
     }
 
     @Override
@@ -68,38 +72,46 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
             view = lInflater.inflate(R.layout.item_list_courier_check_admin, parent, false);
         }
 
+
         final Courier courier = getAd(position);
 
-        if (!ad.getCourier().equals("")){
-            ((TextView) view.findViewById(R.id.review)).setText("Исполнитель");
-            ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
-            ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
-            ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
-            ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
-            ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
-            ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
-            ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    Log.d(StartActivity.LOG_TAG,"rating = " + rating);
-                    float newRatingCourier = (courier.getRatingCourier()+rating)/11;
-                    FirebaseDatabase.getInstance().getReference().child("couriers").child(courier.getTimeCourierCreate()+"")
-                            .child("ratingCourier").setValue(newRatingCourier);
-                }
-            });
-        }else{
-            ((TextView) view.findViewById(R.id.review)).setText("Сделать исполнителем");
-            ((TextView) view.findViewById(R.id.review)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FirebaseDatabase.getInstance().getReference().child("ads").child(ad.getTimeAd()+"").child("courier")
-                            .setValue(courier.getTimeCourierCreate()+"");
-                    Toast.makeText(ctx, "Курьер назначен исполнителем!", Toast.LENGTH_SHORT).show();
-                }
-            });
+        if (courier!=null){
+            if (!ad.getCourier().equals("")){
+                ((TextView) view.findViewById(R.id.review)).setText("Исполнитель");
+                ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
+                ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
+                ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
+                ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
+                ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
+                ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
+                ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        Log.d(StartActivity.LOG_TAG,"rating = " + rating);
+                        float newRatingCourier = (courier.getRatingCourier()+rating)/11;
+                        FirebaseDatabase.getInstance().getReference().child("couriers").child(courier.getTimeCourierCreate()+"")
+                                .child("ratingCourier").setValue(newRatingCourier);
+                        swicher = 1;
+                    }
+                });
+            }else{
+                ((TextView) view.findViewById(R.id.review)).setText("Сделать исполнителем");
+                ((TextView) view.findViewById(R.id.review)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FirebaseDatabase.getInstance().getReference().child("ads").child(ad.getTimeAd()+"").child("courier")
+                                .setValue(courier.getTimeCourierCreate()+"");
+                        Toast.makeText(ctx, "Курьер назначен исполнителем!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
 
-        return view;
+        if (swicher==0){
+            return view;
+        }else{
+            return null;
+        }
     }
 
     // товар по позиции

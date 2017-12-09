@@ -15,5 +15,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="always" />
-
+    <item
+        android:icon="@android:drawable/stat_notify_chat"
+        android:id="@+id/personal_ads_for_courier"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="always" />
 </menu>

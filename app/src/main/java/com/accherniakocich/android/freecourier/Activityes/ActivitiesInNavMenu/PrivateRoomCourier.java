@@ -27,6 +27,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.accherniakocich.android.freecourier.Activityes.Chat.Chat;
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.R;
@@ -172,7 +173,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_private_rooms, menu);
+        getMenuInflater().inflate(R.menu.menu_private_rooms_courier, menu);
         return true;
     }
 
@@ -199,11 +200,13 @@ public class PrivateRoomCourier extends AppCompatActivity {
                     , false
                     , edit_courier_number_phone.getText().toString(), edit_courier_date_of_birdth.getText().toString()
                     , edit_courier_nnumber_card.getText().toString());
-
             saveDataAndImageOnDatabase(c);
-
             Toast.makeText(this, "Данные сохранены", Toast.LENGTH_LONG).show();
             return true;
+        } else if (id == R.id.personal_ads_for_courier){
+            Intent intent = new Intent(PrivateRoomCourier.this, Chat.class);
+            intent.putExtra("fromWhere","courier");
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

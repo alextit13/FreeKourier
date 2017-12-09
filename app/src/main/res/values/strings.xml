@@ -43,4 +43,8 @@
     <string name="ads">Объявления</string>
     <string name="couriers">Курьеры</string>
     <string name="change_rating">Выставите рейтинг</string>
+    <string name="personal_ads">Отдать заказ курьеру:</string>
+    <string name="send">Отправить</string>
+    <string name="enter_a_message">Введите сообщение</string>
+    <string name="messageFromAdmin">Сообщения администрации</string>
 </resources>

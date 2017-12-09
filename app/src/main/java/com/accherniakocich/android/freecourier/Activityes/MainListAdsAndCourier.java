@@ -20,9 +20,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu.PersonalAdsForCourier;
 import com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu.PrivateRoomCourier;
 import com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu.PrivateRoomUser;
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
@@ -59,6 +62,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
     private Courier courier;
     private User user;
     private FloatingActionButton fab;
+    private int clickPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,10 +158,32 @@ public class MainListAdsAndCourier extends AppCompatActivity
         });
     }
 
-    private void adapterCOURIERstart(ArrayList<Courier> list) {
+    private void adapterCOURIERstart(final ArrayList<Courier> list) {
+        clickPosition = 0;
         courierAdapter = new CourierAdapter(MainListAdsAndCourier.this, list,null,false,"");
         mainListAdsCourier_list_view.setAdapter(courierAdapter);
         content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
+
+        mainListAdsCourier_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clickPosition = position;
+                Intent intent = new Intent(MainListAdsAndCourier.this, PersonalAdsForCourier.class);
+                intent.putExtra("user",user);
+                intent.putExtra("courier",list.get(position));
+                startActivityForResult(intent,8);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {return;}
+        Ad adFromPersonalDialog = (Ad)data.getSerializableExtra("ad");
+        Courier c = (Courier) data.getSerializableExtra("courier");
+        FirebaseDatabase.getInstance().getReference().child("ads").child(adFromPersonalDialog.getTimeAd()+"")
+                .child("courier").setValue(c.getTimeCourierCreate()+"");
+        Toast.makeText(this, "Заказ отправлен!", Toast.LENGTH_SHORT).show();
     }
 
     private void mGettingAdsList(DatabaseReference ref) {
@@ -244,9 +270,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if (id == R.id.action_refresh){
+         if (id == R.id.action_refresh){
             content_main_list_ads_progress_bar.setVisibility(View.VISIBLE);
             if (courier!=null){
                 mGettingAdsList(FirebaseDatabase.getInstance().getReference().child("ads"));

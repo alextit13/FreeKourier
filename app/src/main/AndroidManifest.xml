@@ -74,9 +74,18 @@
         <activity
             android:name=".Activityes.AdminConsolle"
             android:screenOrientation="portrait"
-            android:theme="@style/MyActionBar">
+            android:theme="@style/MyActionBar" />
+        <activity
+            android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUserReview"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyActionBar" />
+        <activity
+            android:name=".Activityes.ActivitiesInNavMenu.PersonalAdsForCourier"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
+
         </activity>
-        <activity android:name=".Activityes.ActivitiesInNavMenu.PrivateRoomUserReview"
+        <activity android:name=".Activityes.Chat.Chat"
             android:screenOrientation="portrait"
             android:theme="@style/MyActionBar">
 

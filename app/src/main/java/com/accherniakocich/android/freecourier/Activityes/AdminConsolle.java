@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.accherniakocich.android.freecourier.Activityes.Chat.Chat;
 import com.accherniakocich.android.freecourier.Fragments.FragmentAds;
 import com.accherniakocich.android.freecourier.Fragments.FragmentCouriers;
 import com.accherniakocich.android.freecourier.R;
@@ -114,14 +116,11 @@ public class AdminConsolle extends AppCompatActivity implements FragmentAds.onSo
                     }
                 }).show();
                 break;
-            case R.id.action_delete:
-                // удаляем выбранных курьеров
-                break;
-            case R.id.action_info:
-                // инфо
-                break;
-            case R.id.action_check:
-                // подтверждаем отправку объявления
+            case R.id.action_chat:
+                // чат
+                Intent intent = new Intent(AdminConsolle.this, Chat.class);
+                intent.putExtra("fromWhere","admin");
+                startActivity(intent);
                 break;
             default:
                 break;

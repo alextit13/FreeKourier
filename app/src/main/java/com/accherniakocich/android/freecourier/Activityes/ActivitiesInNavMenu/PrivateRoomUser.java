@@ -28,6 +28,7 @@ import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,11 +44,12 @@ import java.util.Date;
 public class PrivateRoomUser extends AppCompatActivity {
 
     private User user;
-    private TextView edit_user_name,edit_user_email,edit_user_number_phone;
+    private TextView edit_user_name, edit_user_email, edit_user_number_phone;
     private ListView edit_user_list_ads_created;
-    private ArrayList<String>listStringWithDatesAds;
-    private ArrayList<Ad>listAds;
+    private ArrayList<String> listStringWithDatesAds;
+    private ArrayList<Ad> listAds;
     private AdAdapter adAdapter;
+    private int swich = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +62,43 @@ public class PrivateRoomUser extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user");
 
-        edit_user_name = (TextView)findViewById(R.id.edit_user_name);
-        edit_user_email = (TextView)findViewById(R.id.edit_user_email);
-        edit_user_number_phone = (TextView)findViewById(R.id.edit_user_number_phone);
+        edit_user_name = (TextView) findViewById(R.id.edit_user_name);
+        edit_user_email = (TextView) findViewById(R.id.edit_user_email);
+        edit_user_number_phone = (TextView) findViewById(R.id.edit_user_number_phone);
 
-        edit_user_list_ads_created = (ListView)findViewById(R.id.edit_user_list_ads_created);
+        edit_user_list_ads_created = (ListView) findViewById(R.id.edit_user_list_ads_created);
         initDataFromUser();
         downloadDataFromServer(user);
         takeNumberCouriersForOneAd();
     }
 
     private void takeNumberCouriersForOneAd() {
-        final ArrayList<String>listStringAdd = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").child(user.getDate()+"").addValueEventListener(new ValueEventListener() {
+        final ArrayList<String> listStringAdd = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").child(user.getDate() + "").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data: dataSnapshot.getChildren()) {
-                    //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
-                    listStringAdd.add(data.getValue(String.class));
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if (swich==0){
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        Log.d(StartActivity.LOG_TAG, "data = " + data.toString());
+                        listStringAdd.add(data.getValue(String.class));
+                    }
+                    swich=1;
                 }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -91,29 +111,15 @@ public class PrivateRoomUser extends AppCompatActivity {
     private void downloadDataFromServer(User user) {
         listStringWithDatesAds = new ArrayList<>();
         listAds = new ArrayList<>();
-        /*FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").child(user.getDate()+"")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data: dataSnapshot.getChildren()) {
-                            listStringWithDatesAds.add(data.getValue(String.class));// сюда загрузили все даты создания добавленных объявлений
-                        }
-                        Log.d(StartActivity.LOG_TAG,"1 = " + listStringWithDatesAds.size());
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });*/
         FirebaseDatabase.getInstance().getReference().child("ads")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data: dataSnapshot.getChildren()) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
                             listAds.add(data.getValue(Ad.class));// сюда загрузили все объявления
                         }
-                        Log.d(StartActivity.LOG_TAG,"1 = " + listAds.size());
+                        Log.d(StartActivity.LOG_TAG, "1 = " + listAds.size());
                         createAdapter(listAds);
                     }
 
@@ -126,23 +132,23 @@ public class PrivateRoomUser extends AppCompatActivity {
     }
 
     private void createAdapter(ArrayList<Ad> listAd) {
-        final ArrayList<Ad>finalList = new ArrayList<>();//тут все объявы которые нужно добавлять в лист в кабинете юзера
+        final ArrayList<Ad> finalList = new ArrayList<>();//тут все объявы которые нужно добавлять в лист в кабинете юзера
 
-        for (int i = 0; i<listAd.size();i++){
-           if (listAd.get(i).getUsersTime().equals(user.getDate()+"")){
-               finalList.add(listAd.get(i));
-           }
+        for (int i = 0; i < listAd.size(); i++) {
+            if (listAd.get(i).getUsersTime().equals(user.getDate() + "")) {
+                finalList.add(listAd.get(i));
+            }
         }
-        adAdapter = new AdAdapter(this,finalList,null);
+        adAdapter = new AdAdapter(this, finalList, null);
         edit_user_list_ads_created.setAdapter(adAdapter);
 
         edit_user_list_ads_created.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PrivateRoomUser.this,PrivateRoomUserReview.class);
-                intent.putExtra("user",user);
-                intent.putExtra("position",position);
-                intent.putExtra("ad",finalList.get(position));
+                Intent intent = new Intent(PrivateRoomUser.this, PrivateRoomUserReview.class);
+                intent.putExtra("user", user);
+                intent.putExtra("position", position);
+                intent.putExtra("ad", finalList.get(position));
                 startActivity(intent);
             }
         });
@@ -178,7 +184,7 @@ public class PrivateRoomUser extends AppCompatActivity {
         });
     }
 
-    private void initDataFromUser(){
+    private void initDataFromUser() {
         edit_user_name.setText(user.getUserFIO());
         edit_user_email.setText(user.getUserEmail());
         edit_user_number_phone.setText(user.getUserNumberPhone());
@@ -197,17 +203,17 @@ public class PrivateRoomUser extends AppCompatActivity {
             // тут режим редактирования
             editorMode();
             return true;
-        }else if (id == R.id.save_data_private_room){
+        } else if (id == R.id.save_data_private_room) {
             // тут сохраняем все шо написали
             User u = new User(edit_user_name.getText().toString()
-            ,edit_user_number_phone.getText().toString()
-            ,user.getUserEmail()
-            ,user.getListCreatedAds()
-            ,user.getDate());
+                    , edit_user_number_phone.getText().toString()
+                    , user.getUserEmail()
+                    , user.getListCreatedAds()
+                    , user.getDate());
 
             saveDataAndImageOnDatabase(u);
 
-            Toast.makeText(this,"Данные сохранены",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Данные сохранены", Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -217,28 +223,28 @@ public class PrivateRoomUser extends AppCompatActivity {
         FirebaseDatabase.getInstance()
                 .getReference()
                 .child("users")
-                .child(u.getDate()+"")
+                .child(u.getDate() + "")
                 .setValue(u);
     }
 
     private void editorMode() {
-        Intent intent = new Intent(PrivateRoomUser.this,EditDataAboutCourierAndUsersMode.class);
-        intent.putExtra("user",user);
-        startActivityForResult(intent,3); // реквест код для изменения данных 3
+        Intent intent = new Intent(PrivateRoomUser.this, EditDataAboutCourierAndUsersMode.class);
+        intent.putExtra("user", user);
+        startActivityForResult(intent, 3); // реквест код для изменения данных 3
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 3){
+        if (requestCode == 3) {
             if (data == null) {
                 return;
-            }else{
+            } else {
                 User u = (User) data.getSerializableExtra("u");
                 user = u;
                 setDataInSharedPreferences(user);
                 FirebaseDatabase.getInstance().getReference()
                         .child("users")
-                        .child(user.getDate()+"")
+                        .child(user.getDate() + "")
                         .setValue(user);
                 Toast.makeText(this, "Данные изменятся через несколько минут", Toast.LENGTH_SHORT).show();
             }

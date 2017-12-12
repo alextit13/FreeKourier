@@ -85,7 +85,7 @@ public class PrivateRoomUserReview extends AppCompatActivity {
                             if (list.size()>0){
                                 adapter = new CourierAdapterCheckAdmin(PrivateRoomUserReview.this, list, null, true, ad.getTimeAd(), ad);
                                 list_private_room_user_review.setAdapter(adapter);
-                                //Log.d(StartActivity.LOG_TAG,"item adapter = " + adapter.getItem(0));
+                                Log.d(StartActivity.LOG_TAG,"item adapter = " + adapter.getItem(0));
                             }
                         }
 

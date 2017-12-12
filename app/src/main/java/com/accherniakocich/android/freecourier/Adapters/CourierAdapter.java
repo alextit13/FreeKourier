@@ -84,11 +84,11 @@ public class CourierAdapter extends BaseAdapter{
         }
 
         if (courier.isCheckBoxCourier()){ // если курьера выбрали для исполнения работы
-            ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
             ((TextView) view.findViewById(R.id.item_list_courier_number_of_card)).setText(courier.getNumberOfCard());
             ((TextView) view.findViewById(R.id.item_list_courier_number_of_phone)).setText(courier.getNumberOfPhone());
             ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
         }
+        ((TextView) view.findViewById(R.id.item_list_courier_name)).setText(courier.getNameCourier());
         ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
         ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
 
@@ -120,9 +120,6 @@ public class CourierAdapter extends BaseAdapter{
         }else{
             ((ImageView)view.findViewById(R.id.delete_courier)).setVisibility(View.INVISIBLE);
         }
-
-        //((TextView) view.findViewById(R.id.tvText)).setText(ad.getNameJobAd());
-
         return view;
     }
 

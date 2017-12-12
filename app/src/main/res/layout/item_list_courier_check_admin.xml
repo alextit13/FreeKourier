@@ -21,7 +21,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="center"
                 android:numStars="5"
-                android:stepSize="0.1"
+                android:stepSize="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </TableRow>

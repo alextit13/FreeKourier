@@ -48,7 +48,7 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return objects.size();
+        return 1;
     }
 
     // элемент по позиции
@@ -84,14 +84,16 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
                 ((TextView) view.findViewById(R.id.item_list_courier_date_of_birdth)).setText(courier.getDateOfBirdth());
                 ((TextView) view.findViewById(R.id.item_list_courier_about)).setText(courier.getAboutCourier());
                 ((TextView) view.findViewById(R.id.item_list_courier_number_of_driver_root)).setText(courier.getNumberOfDriverRoot());
+                ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setRating(courier.getRatingCourier());
                 ((RatingBar) view.findViewById(R.id.item_list_courier_rating_bar)).setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                     @Override
-                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    public void onRatingChanged(RatingBar ratingBar, float  rating, boolean fromUser) {
                         Log.d(StartActivity.LOG_TAG,"rating = " + rating);
-                        float newRatingCourier = (courier.getRatingCourier()+rating)/11;
+                        float newRatingCourier = (courier.getRatingCourier()+rating*10)/11;
                         FirebaseDatabase.getInstance().getReference().child("couriers").child(courier.getTimeCourierCreate()+"")
                                 .child("ratingCourier").setValue(newRatingCourier);
                         swicher = 1;
+                        Toast.makeText(ctx, "Рейтинг выставлен!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }else{

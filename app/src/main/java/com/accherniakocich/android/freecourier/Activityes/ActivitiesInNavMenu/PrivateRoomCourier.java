@@ -1,17 +1,14 @@
 package com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,14 +16,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.Activityes.Chat.Chat;
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
@@ -44,7 +39,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -81,9 +75,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
         Intent intent = getIntent();
         courier = (Courier) intent.getSerializableExtra("courier");
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
         private_room_courier_editor_mode = (LinearLayout) findViewById(R.id.private_room_courier_editor_mode);
-
         edit_courier_name = (TextView) findViewById(R.id.edit_courier_name);
         edit_courier_email = (TextView) findViewById(R.id.edit_courier_email);
         edit_courier_number_phone = (TextView) findViewById(R.id.edit_courier_number_phone);
@@ -91,17 +83,13 @@ public class PrivateRoomCourier extends AppCompatActivity {
         edit_courier_date_of_birdth = (TextView) findViewById(R.id.edit_courier_date_of_birdth);
         edit_courier_nnumber_card = (TextView) findViewById(R.id.edit_courier_nnumber_card);
         edit_courier_about_courier = (TextView) findViewById(R.id.edit_courier_about_courier);
-
         edit_courier_rating = (RatingBar) findViewById(R.id.edit_courier_rating);
-
         edit_courier_get_photo_from_camenra = (ImageView) findViewById(R.id.edit_courier_get_photo_from_camenra);
         edit_courier_get_photo_from_memory = (ImageView) findViewById(R.id.edit_courier_get_photo_from_memory);
-
         edit_courier_photo = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.edit_courier_photo);
-
         edit_courier_list_ads_personal = (ListView) findViewById(R.id.edit_courier_list_ads_personal);
-        downloadAndCompleteListWithAds();
 
+        downloadAndCompleteListWithAds();
         initDataFromCourier();
     }
 
@@ -115,17 +103,14 @@ public class PrivateRoomCourier extends AppCompatActivity {
                 for (DataSnapshot data: dataSnapshot.getChildren()) {
                     list.add(Long.parseLong(data.getValue().toString()));// сфда загрузили все даты создания добавленных объявлений
                 }
-                Log.d(StartActivity.LOG_TAG,"size = " + list.size());
                 final ArrayList<Ad>arrayList = new ArrayList<>();
                 FirebaseDatabase.getInstance().getReference().child("ads").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot data: dataSnapshot.getChildren()) {
-                            //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
                             arrayList.add(data.getValue(Ad.class)); // тут все объявления приложения
                         }
                         ArrayList<Ad>finalList = new ArrayList<>();
-                        Log.d(StartActivity.LOG_TAG,"arrayList size = " + arrayList.size());
                         if (arrayList.size()!=0){
                             for (int i = 0; i<arrayList.size();i++){
                                 for (int j = 0; j<list.size();j++){
@@ -165,7 +150,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
         edit_courier_date_of_birdth.setText(courier.getDateOfBirdth());
         edit_courier_nnumber_card.setText(courier.getNumberOfCard());
         edit_courier_about_courier.setText(courier.getAboutCourier());
-
         edit_courier_rating.setRating(courier.getRatingCourier());
 
         Picasso.with(this).load(courier.getImagePathCourier()).into(edit_courier_photo);
@@ -221,7 +205,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
         if (photo != null) {
             String namePhoto = courier.getTimeCourierCreate() + ".jpg"; // уникальное имя фото
             StorageReference mountainsRef = mStorageRef.child(namePhoto);
-
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             byte[] data = baos.toByteArray();
@@ -234,10 +217,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-
-                    //reference.child("ads").child(nameChild+"").setValue(ad);
                     c.setImagePathCourier(downloadUrl + "");
                     FirebaseDatabase.getInstance().getReference()
                             .child("couriers").child(c.getTimeCourierCreate() + "")
@@ -245,10 +225,7 @@ public class PrivateRoomCourier extends AppCompatActivity {
                     setDataInSharedPreferences(c);
                 }
             });
-        } else {
-
         }
-
     }
 
     public void onClick(View view) {
@@ -283,7 +260,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 photoURI = FileProvider.getUriForFile(this, "com.accherniakocich.android.freecourier", photoFile);
-                //Log.d(MainActivity.LOG_TAG,"photoFile = "+photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
@@ -291,8 +267,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
-        // Create an image file name
-        //Log.d(PrivateRoomCourier.LOG_TAG,"go");
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -301,8 +275,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
-
-        // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
@@ -311,19 +283,15 @@ public class PrivateRoomCourier extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_TAKE_PHOTO) {
             if (resultCode == RESULT_OK) {
-                // Image captured and saved to fileUri specified in the Intent
-                //Toast.makeText(this, "Image saved", Toast.LENGTH_LONG).show();
                 try {
                     photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI); // тут мы получаем полноценное изображение
-                    //Log.d(MainActivity.LOG_TAG,"photo image = "+bitmap.getWidth());
                     edit_courier_photo.setImageBitmap(photo);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 if (resultCode == RESULT_CANCELED) {
-                    // User cancelled the image capture
-                    // So need to Delete the path from DB
+
                 }
             }
         } else if (requestCode == SELECT_FILE) {
@@ -348,7 +316,6 @@ public class PrivateRoomCourier extends AppCompatActivity {
             if (data == null) {
                 return;
             } else {
-
                 Courier c = (Courier) data.getSerializableExtra("c");
                 courier = c;
                 setDataInSharedPreferences(courier);

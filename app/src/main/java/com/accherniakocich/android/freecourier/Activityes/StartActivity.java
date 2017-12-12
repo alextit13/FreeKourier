@@ -2,31 +2,11 @@ package com.accherniakocich.android.freecourier.Activityes;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.accherniakocich.android.freecourier.R;
-import com.accherniakocich.android.freecourier.Сlasses.Admin;
-import com.accherniakocich.android.freecourier.Сlasses.Courier;
-import com.accherniakocich.android.freecourier.Сlasses.User;
-import com.google.gson.Gson;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Admin;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
@@ -37,7 +17,6 @@ public class StartActivity extends AppCompatActivity {
 
 
     public static final String LOG_TAG = "MyLogs";
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     private Button start_activity_log_in, start_activity_registration;
 
@@ -47,7 +26,6 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         startProgrammWithLoginUser();
         init();
-
     }
 
     private void startProgrammWithLoginUser() {
@@ -60,7 +38,6 @@ public class StartActivity extends AppCompatActivity {
         Courier c = gson.fromJson(json_c, Courier.class);
         User u = gson.fromJson(json_u, User.class);
         Admin a = gson.fromJson(json_a, Admin.class);
-
         if (a != null) {
             Intent intent = new Intent(StartActivity.this, AdminConsolle.class);
             intent.putExtra("admin",a);
@@ -79,7 +56,6 @@ public class StartActivity extends AppCompatActivity {
     private void init() {
         start_activity_log_in = (Button) findViewById(R.id.start_activity_log_in);
         start_activity_registration = (Button) findViewById(R.id.start_activity_registration);
-
 
         start_activity_log_in.setOnClickListener(new View.OnClickListener() {
             @Override

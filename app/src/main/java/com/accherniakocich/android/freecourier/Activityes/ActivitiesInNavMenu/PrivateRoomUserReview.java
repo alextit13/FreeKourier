@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
-import com.accherniakocich.android.freecourier.Adapters.CourierAdapter;
 import com.accherniakocich.android.freecourier.Adapters.CourierAdapterCheckAdmin;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
@@ -18,11 +15,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 public class PrivateRoomUserReview extends AppCompatActivity {
-
 
     private CourierAdapterCheckAdmin adapter;
     private ListView list_private_room_user_review;
@@ -31,7 +26,6 @@ public class PrivateRoomUserReview extends AppCompatActivity {
     private ArrayList<Ad> listAd;
     private User user;
     private Ad ad;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +39,8 @@ public class PrivateRoomUserReview extends AppCompatActivity {
         list_private_room_user_review = (ListView) findViewById(R.id.list_private_room_user_review);
         Intent intent = getIntent();
         position = intent.getIntExtra("position", 0);
-
         user = (User) intent.getSerializableExtra("user");
         ad = (Ad) intent.getSerializableExtra("ad");
-
         String numberAd = ad.getTimeAd();
         final ArrayList<String> listNumberOfCouriers = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("couriersWitwApp").child(numberAd).addValueEventListener(new ValueEventListener() {
@@ -76,7 +68,6 @@ public class PrivateRoomUserReview extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             list.add(dataSnapshot.getValue(Courier.class));
-
                             for (int i = 0; i<list.size();i++){
                                 if (list.get(i)==null){
                                     list.remove(i);
@@ -85,7 +76,6 @@ public class PrivateRoomUserReview extends AppCompatActivity {
                             if (list.size()>0){
                                 adapter = new CourierAdapterCheckAdmin(PrivateRoomUserReview.this, list, null, true, ad.getTimeAd(), ad);
                                 list_private_room_user_review.setAdapter(adapter);
-                                Log.d(StartActivity.LOG_TAG,"item adapter = " + adapter.getItem(0));
                             }
                         }
 

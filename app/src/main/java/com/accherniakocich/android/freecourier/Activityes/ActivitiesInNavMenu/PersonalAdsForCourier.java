@@ -3,12 +3,9 @@ package com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
@@ -33,7 +30,6 @@ public class PersonalAdsForCourier extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_ads_for_courier);
-
         init();
     }
 
@@ -70,7 +66,6 @@ public class PersonalAdsForCourier extends AppCompatActivity {
         }
         adAdapter = new AdAdapter(this,finalList,null);
         list_view_personal_ads_for_courier.setAdapter(adAdapter);
-
         list_view_personal_ads_for_courier.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

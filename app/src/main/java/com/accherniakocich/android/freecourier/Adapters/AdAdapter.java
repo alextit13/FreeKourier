@@ -1,6 +1,5 @@
 package com.accherniakocich.android.freecourier.Adapters;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -9,21 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.accherniakocich.android.freecourier.Activityes.MainListAdsAndCourier;
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
-import com.accherniakocich.android.freecourier.Сlasses.User;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,9 +100,6 @@ public class AdAdapter extends BaseAdapter{
                             .setMessage("Вы уверены что хотите удалить заказ?")
                             .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    //пользаватель взял в работу заказ
-                                    //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
-                                    //listWithAdsCourier.add(objects.get(position));
                                     Log.d(StartActivity.LOG_TAG,"click");
                                     FirebaseDatabase.getInstance().getReference()
                                             .child("ads")
@@ -136,8 +126,6 @@ public class AdAdapter extends BaseAdapter{
                                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         //пользаватель взял в работу заказ
-                                        //ArrayList<Ad>listWithAdsCourier = courier.getListAdCourier();
-                                        //listWithAdsCourier.add(objects.get(position));
                                         long dateAddAdInList = new Date().getTime();
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child("couriersWitwApp")

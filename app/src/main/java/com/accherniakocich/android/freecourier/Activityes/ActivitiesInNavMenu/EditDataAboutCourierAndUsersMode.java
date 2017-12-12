@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.accherniakocich.android.freecourier.Activityes.MainListAdsAndCourier;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;

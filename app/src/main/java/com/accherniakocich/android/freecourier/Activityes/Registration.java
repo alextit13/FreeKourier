@@ -6,7 +6,6 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
@@ -26,34 +24,24 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Registration extends AppCompatActivity {
 
     private FrameLayout registration_container;
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private EditText registration_ET_email,registration_ET_password;
     private RadioGroup registration_RG_check_group;
     private RadioButton registration_RB_customer,registration_RB_courier;
     private Button registration_button_cancel,registration_button_ok;
-
     private ProgressBar registration_progress_bar;
     private LinearLayout container_courier_data;
     private LinearLayout.LayoutParams layoutParams;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
-
-    //для регистрации курьера
     private EditText registration_courier_FIO, registration_courier_number_of_phone,registration_courier_date_of_birdth
             ,registration_courier_number_of_driver_root,registration_courier_number_of_card;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +72,6 @@ public class Registration extends AppCompatActivity {
         registration_RG_check_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                //Log.d(StartActivity.LOG_TAG, "group = " + i+", id = " + registration_RB_courier.getId());
                 if (i==registration_RB_courier.getId()){
                     // курьер
                     layoutParams.height = 700;
@@ -112,13 +99,7 @@ public class Registration extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        try {
-            Log.d(StartActivity.LOG_TAG,currentUser.getDisplayName());
-        }catch (Exception e){
-            Log.d(StartActivity.LOG_TAG,"нету пользователя");
-        }
     }
 
     public void onClick(View view) {
@@ -147,9 +128,6 @@ public class Registration extends AppCompatActivity {
                 if (task.isComplete()){
                     Intent intent;
                     if (registration_RB_courier.isChecked()){ // регистрация курьера
-
-                        //Log.d(StartActivity.LOG_TAG,"task = " + task.getException());
-                        //intent = new Intent(Registration.this,MainListCouriers.class); // регистрация как пользователь
                         intent = new Intent(Registration.this,MainListAdsAndCourier.class); // регистрация как курьер
                         ArrayList <String> list = new ArrayList<>();
                         list.add("0");
@@ -194,11 +172,5 @@ public class Registration extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        //FirebaseAuth.getInstance().signOut();
-        super.onDestroy();
     }
 }

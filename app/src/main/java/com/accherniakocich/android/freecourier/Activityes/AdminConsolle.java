@@ -131,8 +131,6 @@ public class AdminConsolle extends AppCompatActivity implements FragmentAds.onSo
 
     @Override
     public void someEvent(ArrayList<Ad>list) {
-        //Fragment frag1 = getFragmentManager().findFragmentById(R.id.fragment_ads_admin);
         listWithAds = list;
-
     }
 }

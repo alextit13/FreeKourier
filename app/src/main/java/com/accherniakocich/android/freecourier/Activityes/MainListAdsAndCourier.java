@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,7 +23,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu.PersonalAdsForCourier;
 import com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu.PrivateRoomCourier;
 import com.accherniakocich.android.freecourier.Activityes.ActivitiesInNavMenu.PrivateRoomUser;
@@ -34,14 +32,12 @@ import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.accherniakocich.android.freecourier.Сlasses.User;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
 public class MainListAdsAndCourier extends AppCompatActivity
@@ -53,12 +49,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
     private ArrayList<Ad> listAd;
     private ArrayList<Courier>listCourier;
     private CourierAdapter courierAdapter;
-
-    private FirebaseDatabase database;
     private DatabaseReference reference;
-
-    private int SWICH_start_list_position = 1;
-    private int SWICH_end_list_position = 20;
     private Courier courier;
     private User user;
     private FloatingActionButton fab;
@@ -125,9 +116,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
             String json = gson.toJson(user);
             prefsEditor.putString("user", json);
             prefsEditor.commit();
-
             reference = FirebaseDatabase.getInstance().getReference().child("couriers");
-
             listCourier = new ArrayList<>();
             mGettingCourierList(reference);
         }
@@ -139,7 +128,6 @@ public class MainListAdsAndCourier extends AppCompatActivity
 
     private void mGettingCourierList(DatabaseReference ref) {
         final ArrayList<Courier>list = new ArrayList<>();
-        //Log.d(StartActivity.LOG_TAG,"start download");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -147,7 +135,6 @@ public class MainListAdsAndCourier extends AppCompatActivity
                     Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
                     list.add(data.getValue(Courier.class));
                 }
-                //Log.d(StartActivity.LOG_TAG,"data = " + list.size());
                 adapterCOURIERstart(list);
             }
 
@@ -188,12 +175,10 @@ public class MainListAdsAndCourier extends AppCompatActivity
 
     private void mGettingAdsList(DatabaseReference ref) {
         final ArrayList<Ad>list = new ArrayList<>();
-        //Log.d(StartActivity.LOG_TAG,"start download");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data: dataSnapshot.getChildren()) {
-                    //Log.d(StartActivity.LOG_TAG,"data = " + data.toString());
                     list.add(data.getValue(Ad.class));
                 }
                 adapterADstart(list);
@@ -257,19 +242,13 @@ public class MainListAdsAndCourier extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_list_ads, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
          if (id == R.id.action_refresh){
             content_main_list_ads_progress_bar.setVisibility(View.VISIBLE);
             if (courier!=null){
@@ -279,7 +258,6 @@ public class MainListAdsAndCourier extends AppCompatActivity
             }
             content_main_list_ads_progress_bar.setVisibility(View.INVISIBLE);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -287,9 +265,7 @@ public class MainListAdsAndCourier extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.private_room) {
             if (courier!=null){ // если вошел курьер
                 Intent intent = new Intent(MainListAdsAndCourier.this,PrivateRoomCourier.class);
@@ -300,8 +276,6 @@ public class MainListAdsAndCourier extends AppCompatActivity
                 intent.putExtra("user",user);
                 startActivity(intent);
             }
-
-            // Handle the camera action
         } else if (id == R.id.exit) {
             new AlertDialog.Builder(MainListAdsAndCourier.this)
                     .setTitle("Выход")
@@ -326,7 +300,6 @@ public class MainListAdsAndCourier extends AppCompatActivity
             }).show();
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

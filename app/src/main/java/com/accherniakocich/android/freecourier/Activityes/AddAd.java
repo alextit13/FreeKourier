@@ -1,7 +1,6 @@
 package com.accherniakocich.android.freecourier.Activityes;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -11,13 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.User;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Date;
 
 public class AddAd extends AppCompatActivity {

@@ -1,25 +1,21 @@
 package com.accherniakocich.android.freecourier.Fragments;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
-import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.Adapters.AdAdapter;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
-import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 public class FragmentAds extends Fragment{
@@ -70,7 +66,6 @@ public class FragmentAds extends Fragment{
                         finalList.add(list.get(i));
                     }
                 }
-                //Log.d(StartActivity.LOG_TAG,"listSize = " + list.size());
                 if (getActivity()!=null){
                     adAdapter = new AdAdapter(getActivity(),finalList,null,"admin");
                     fragment_ads_admin.setAdapter(adAdapter);

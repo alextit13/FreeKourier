@@ -9,22 +9,18 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Chat extends AppCompatActivity {
 
@@ -56,9 +52,7 @@ public class Chat extends AppCompatActivity {
             ((TableRow) findViewById(R.id.chat_admin_container_check_couriers)).setVisibility(View.INVISIBLE);
         }
         listMessage = new ArrayList<>();
-
         list_chat = (ListView)findViewById(R.id.list_chat);
-
         all_couriers = (TextView)findViewById(R.id.all_couriers);
         check_couriers = (TextView)findViewById(R.id.check_couriers);
         all_couriers.setOnClickListener(new View.OnClickListener() {
@@ -75,18 +69,15 @@ public class Chat extends AppCompatActivity {
                 check_couriers.setBackgroundColor(Color.GREEN);
             }
         });
-
         image_button_send_message_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (!edit_text_chat.getText().toString().equals("")
                         &&!selectCouriers){
                     long dateMessage = new Date().getTime();
                     FirebaseDatabase.getInstance().getReference().child("chat").child(dateMessage+"")
                             .setValue(edit_text_chat.getText().toString());
                     edit_text_chat.setText("");
-
                     Toast.makeText(Chat.this, "Сообщение отправлено", Toast.LENGTH_SHORT).show();
                 }else if (!edit_text_chat.getText().toString().equals("")
                         &&selectCouriers){
@@ -169,7 +160,6 @@ public class Chat extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {return;}
         if (requestCode==9){
-            Log.d(StartActivity.LOG_TAG,"swich = " + selectCouriers);
             selectCouriers = data.getBooleanExtra("swich",false);
             listCouriersCheck = data.getStringArrayListExtra("list");
         }

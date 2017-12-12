@@ -6,22 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.accherniakocich.android.freecourier.Activityes.StartActivity;
 import com.accherniakocich.android.freecourier.R;
 import com.accherniakocich.android.freecourier.Сlasses.Ad;
 import com.accherniakocich.android.freecourier.Сlasses.Admin;
 import com.accherniakocich.android.freecourier.Сlasses.Courier;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CourierAdapterCheckAdmin extends BaseAdapter{
     Context ctx;
@@ -51,19 +45,16 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
         return 1;
     }
 
-    // элемент по позиции
     @Override
     public Object getItem(int position) {
         return objects.get(position);
     }
 
-    // id по позиции
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-    // пункт списка
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
@@ -116,7 +107,6 @@ public class CourierAdapterCheckAdmin extends BaseAdapter{
         }
     }
 
-    // товар по позиции
     Courier getAd(int position) {
         return ((Courier) getItem(position));
     }

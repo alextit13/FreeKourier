@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/color_red_100"
-        app:srcCompat="@drawable/add_floating_action_button" />
+        app:srcCompat="@drawable/add_floating_action_button"
+        tools:ignore="VectorDrawableCompat" />
 
 </android.support.design.widget.CoordinatorLayout>

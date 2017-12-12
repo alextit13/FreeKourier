@@ -17,6 +17,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TableRow
+        android:id="@+id/chat_admin_container_check_couriers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/all_couriers"
+            android:gravity="center"
+            android:background="@drawable/background_edit_text"
+            android:text="@string/all_couriers"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/check_couriers"
+            android:gravity="center"
+            android:text="@string/check_couriers"
+            android:background="@drawable/background_edit_text"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+    <TableRow
         android:id="@+id/chat_admin_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -85,10 +85,13 @@
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog">
 
         </activity>
-        <activity android:name=".Activityes.Chat.Chat"
+        <activity
+            android:name=".Activityes.Chat.Chat"
             android:screenOrientation="portrait"
             android:theme="@style/MyActionBar">
 
+        </activity>
+        <activity android:name=".Activityes.Chat.ListCouriersForChat">
         </activity>
     </application>
 

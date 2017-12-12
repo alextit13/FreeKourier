@@ -47,4 +47,6 @@
     <string name="send">Отправить</string>
     <string name="enter_a_message">Введите сообщение</string>
     <string name="messageFromAdmin">Сообщения администрации</string>
+    <string name="all_couriers">Все курьеры</string>
+    <string name="check_couriers">Выбрать курьеров</string>
 </resources>

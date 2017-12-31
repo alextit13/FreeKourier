@@ -41,7 +41,7 @@ public class Registration extends AppCompatActivity {
     private LinearLayout container_courier_data;
     private LinearLayout.LayoutParams layoutParams;
     private EditText registration_courier_FIO, registration_courier_number_of_phone,registration_courier_date_of_birdth
-            ,registration_courier_number_of_driver_root,registration_courier_number_of_card;
+            ,registration_courier_number_of_driver_root;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class Registration extends AppCompatActivity {
 
         registration_ET_email = (EditText)findViewById(R.id.registration_ET_email);
         registration_ET_password = (EditText)findViewById(R.id.registration_ET_password);
-        registration_courier_number_of_card = (EditText)findViewById(R.id.registration_courier_number_of_card);
+        //registration_courier_number_of_card = (EditText)findViewById(R.id.registration_courier_number_of_card);
 
 
         registration_RG_check_group = (RadioGroup)findViewById(R.id.registration_RG_check_group);
@@ -143,7 +143,7 @@ public class Registration extends AppCompatActivity {
                                 false,
                                 registration_courier_number_of_phone.getText().toString(),
                                 registration_courier_date_of_birdth.getText().toString(),
-                                registration_courier_number_of_card.getText().toString());
+                                "");
                         FirebaseDatabase.getInstance().getReference()
                                 .child("couriers")
                                 .child(date+"")

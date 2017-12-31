@@ -28,7 +28,7 @@
     <string name="hint_example_number_of_driver_root">Номер вод. прав</string>
     <string name="take_to_work">Оставить заявку</string>
     <string name="title_activity_main_list_courier">MainListCourier</string>
-    <string name="hint_example_number_of_card">Номер карточки</string>
+    <string name="hint_example_number_of_card">Номер банковской карты</string>
     <string name="exit">Выйти</string>
     <string name="private_room">Личный кабинет</string>
     <string name="save_button_edit_data_private_room">Сохранить</string>
@@ -49,4 +49,6 @@
     <string name="messageFromAdmin">Сообщения администрации</string>
     <string name="all_couriers">Все курьеры</string>
     <string name="check_couriers">Выбрать курьеров</string>
+    <string name="sort_on_cities">Сортировка по городам</string>
+    <string name="choice_city">Выберите город:</string>
 </resources>

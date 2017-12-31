@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RatingBar
+                style="@style/customRatingBar"
                 android:layout_marginStart="10dp"
                 android:id="@+id/item_list_courier_rating_bar"
                 android:layout_marginEnd="10dp"
@@ -103,8 +104,8 @@
             android:layout_gravity="center"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/item_list_courier_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/cargo"/>
         <TextView
             android:id="@+id/item_list_courier_number_of_driver_root"

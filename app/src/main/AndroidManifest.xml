@@ -91,7 +91,15 @@
             android:theme="@style/MyActionBar">
 
         </activity>
-        <activity android:name=".Activityes.Chat.ListCouriersForChat">
+        <activity android:name=".Activityes.Chat.ListCouriersForChat"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyActionBar">
+
+        </activity>
+        <activity android:name=".Activityes.Find.Find"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyActionBar">
+
         </activity>
     </application>
 

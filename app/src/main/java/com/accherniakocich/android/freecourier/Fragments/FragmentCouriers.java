@@ -43,9 +43,11 @@ public class FragmentCouriers extends Fragment{
                 for (DataSnapshot data: dataSnapshot.getChildren()) {
                     list.add(data.getValue(Courier.class));
                 }
-                courierAdapter = new CourierAdapter(getActivity(),list,new Admin(),false,"");
-                fragment_ads_admin.setAdapter(courierAdapter);
-                progress_bar_courier_fragment.setVisibility(View.INVISIBLE);
+                if (getActivity()!=null){
+                    courierAdapter = new CourierAdapter(getActivity(),list,new Admin(),false,"");
+                    fragment_ads_admin.setAdapter(courierAdapter);
+                    progress_bar_courier_fragment.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override

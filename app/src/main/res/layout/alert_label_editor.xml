@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="10dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Spinner
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/spinner_city"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </Spinner>
+    <TableRow
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:layout_weight="1"
+            android:id="@+id/dialog_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:layout_weight="1"
+            android:id="@+id/dialog_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+</LinearLayout>
